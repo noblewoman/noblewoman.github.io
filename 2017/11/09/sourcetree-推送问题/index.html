@@ -3,14 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2017/11 | 侯晓丹的个人空间</title>
+  <title>sourcetree 推送问题 | 侯晓丹的个人空间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="侯晓丹的个人空间">
-<meta property="og:url" content="noblewoman.github.io/archives/2017/11/index.html">
+  <meta name="description" content="背景：私有库里接入了腾讯云短视频SDK，搞完配置要推送到远程时，推送失败，提示：POST Git-receive-pack (chunked)。 原因：网上查找到一个比较靠谱的说法：This is a bug in git, when using https it will use chunked encoding for uploads above a certain size. those">
+<meta name="keywords" content="sourcetree git push">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sourcetree 推送问题">
+<meta property="og:url" content="noblewoman.github.io/2017/11/09/sourcetree-推送问题/index.html">
 <meta property="og:site_name" content="侯晓丹的个人空间">
+<meta property="og:description" content="背景：私有库里接入了腾讯云短视频SDK，搞完配置要推送到远程时，推送失败，提示：POST Git-receive-pack (chunked)。 原因：网上查找到一个比较靠谱的说法：This is a bug in git, when using https it will use chunked encoding for uploads above a certain size. those">
+<meta property="og:image" content="/Users/weidian2015090111/Desktop/1.png">
+<meta property="og:updated_time" content="2017-11-09T03:37:12.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="侯晓丹的个人空间">
+<meta name="twitter:title" content="sourcetree 推送问题">
+<meta name="twitter:description" content="背景：私有库里接入了腾讯云短视频SDK，搞完配置要推送到远程时，推送失败，提示：POST Git-receive-pack (chunked)。 原因：网上查找到一个比较靠谱的说法：This is a bug in git, when using https it will use chunked encoding for uploads above a certain size. those">
+<meta name="twitter:image" content="/Users/weidian2015090111/Desktop/1.png">
   
     <link rel="alternate" href="/atom.xml" title="侯晓丹的个人空间" type="application/atom+xml">
   
@@ -63,130 +70,77 @@
   </div>
 </div>
 
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap animated rubberBand">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/11/09/sourcetree-推送问题/" class="archive-article-date">
+        <section id="main"><article id="post-sourcetree-推送问题" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/09/sourcetree-推送问题/" class="article-date">
   <time class="post-time" datetime="2017-11-09T02:51:28.000Z" itemprop="datePublished">
     <span class="post-month">11月</span><br/>
     <span class="post-day">09</span>
   </time>
 </a>
-      
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/09/sourcetree-推送问题/">sourcetree 推送问题</a>
+    <h1 class="article-title" itemprop="name">
+      sourcetree 推送问题
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/11/08/hexo-博客初体验/" class="archive-article-date">
-  <time class="post-time" datetime="2017-11-08T03:48:50.000Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">08</span>
-  </time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/08/hexo-博客初体验/">hexo 博客初体验</a>
-    </h1>
-  
+        <div>
+          
+          
+              
 
-    </header>
-  </div>
-</article>
-  
+          
+        </div>
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/11/08/创建一个私有库/" class="archive-article-date">
-  <time class="post-time" datetime="2017-11-08T03:45:05.000Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">08</span>
-  </time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/08/创建一个私有库/">创建一个私有库</a>
-    </h1>
-  
+        <a id="more"></a>
+<ul>
+<li>背景：私有库里接入了腾讯云短视频SDK，搞完配置要推送到远程时，推送失败，提示：POST Git-receive-pack (chunked)。</li>
+<li><p>原因：网上查找到一个比较靠谱的说法：This is a bug in git, when using https it will use chunked encoding for uploads above a certain size. those do not work.<br>A trivial fix is to tell git to not chunk until some ridiculously large size value, such as: <strong>git config http.postBuffer 524288000</strong></p>
+</li>
+<li><p>解决方法：1.  命令行配置：git config http.postBuffer 524288000<br>2.打开sourcetree -&gt; 设置（右上角） -&gt; 高级 -&gt; 编辑配置文件<br>在文件最后添加<br>[http] </p>
+<pre><code>postBuffer = 524288000
+</code></pre><p>点击确定，重新推送。</p>
+</li>
+<li><p>后续问题，sourcetree 推送之后：提示：POST git-receive-pack (239851501 bytes) …</p>
+</li>
+<li>解决：转成命令推送 git push origin master<br><img src="/Users/weidian2015090111/Desktop/1.png" alt="avatar"><br>图上显示推送成功，然而却卡着不动了。把原来修改的配置文件删掉。推送成功。</li>
+</ul>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/11/06/test-my-site/" class="archive-article-date">
-  <time class="post-time" datetime="2017-11-06T08:06:01.000Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">06</span>
-  </time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/06/test-my-site/">test_my_site</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/11/06/hello-world/" class="archive-article-date">
-  <time class="post-time" datetime="2017-11-06T07:46:51.000Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">06</span>
-  </time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="noblewoman.github.io/2017/11/09/sourcetree-推送问题/" data-id="cj9rxcvwu00020is62bt7jxss" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/06/hello-world/">Hello World</a>
-    </h1>
-  
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sourcetree-git-push/">sourcetree git push</a></li></ul>
 
-    </header>
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/11/08/hexo-博客初体验/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">hexo 博客初体验</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
+
 
 
 </section>
