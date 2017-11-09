@@ -12,12 +12,10 @@
 <meta property="og:url" content="noblewoman.github.io/2017/11/09/sourcetree-推送问题/index.html">
 <meta property="og:site_name" content="侯晓丹的个人空间">
 <meta property="og:description" content="背景：私有库里接入了腾讯云短视频SDK，搞完配置要推送到远程时，推送失败，提示：POST Git-receive-pack (chunked)。 原因：网上查找到一个比较靠谱的说法：This is a bug in git, when using https it will use chunked encoding for uploads above a certain size. those">
-<meta property="og:image" content="/Users/weidian2015090111/Desktop/1.png">
-<meta property="og:updated_time" content="2017-11-09T03:37:12.000Z">
+<meta property="og:updated_time" content="2017-11-09T03:43:34.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="sourcetree 推送问题">
 <meta name="twitter:description" content="背景：私有库里接入了腾讯云短视频SDK，搞完配置要推送到远程时，推送失败，提示：POST Git-receive-pack (chunked)。 原因：网上查找到一个比较靠谱的说法：This is a bug in git, when using https it will use chunked encoding for uploads above a certain size. those">
-<meta name="twitter:image" content="/Users/weidian2015090111/Desktop/1.png">
   
     <link rel="alternate" href="/atom.xml" title="侯晓丹的个人空间" type="application/atom+xml">
   
@@ -113,13 +111,14 @@
 </li>
 <li><p>后续问题，sourcetree 推送之后：提示：POST git-receive-pack (239851501 bytes) …</p>
 </li>
-<li>解决：转成命令推送 git push origin master<br><img src="/Users/weidian2015090111/Desktop/1.png" alt="avatar"><br>图上显示推送成功，然而却卡着不动了。把原来修改的配置文件删掉。推送成功。</li>
+<li>解决：转成命令推送 git push origin master<br>命令卡在：<strong>total 41(delta 8), reused 0(delta 0)</strong></li>
+<li>把原来修改的配置文件删掉。推送成功。</li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="noblewoman.github.io/2017/11/09/sourcetree-推送问题/" data-id="cj9rxcvwu00020is62bt7jxss" class="article-share-link">Share</a>
+      <a data-url="noblewoman.github.io/2017/11/09/sourcetree-推送问题/" data-id="cj9rxetmv00031hs6v0h9sc14" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sourcetree-git-push/">sourcetree git push</a></li></ul>
@@ -132,7 +131,7 @@
   
   
     <a href="/2017/11/08/hexo-博客初体验/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+      <strong class="article-nav-caption">Ancien</strong>
       <div class="article-nav-title">hexo 博客初体验</div>
     </a>
   
