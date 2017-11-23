@@ -3,14 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives | 侯晓丹的个人空间</title>
+  <title>侯晓丹的个人空间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="title: ios 状态栏设置date: 2017-11-23 13:52:27tags:— status setting 设置分为两种情况，一种是全局隐藏，一种是局部隐藏。 全局隐藏： target -&amp;gt;Deployment Info -&amp;gt; Status Bar style -&amp;gt; hidden status bar。局部隐藏分为两种情况：一： info.plist 文件中V">
+<meta property="og:type" content="article">
 <meta property="og:title" content="侯晓丹的个人空间">
-<meta property="og:url" content="noblewoman.github.io/archives/index.html">
+<meta property="og:url" content="noblewoman.github.io/2017/11/23/ios-状态栏设置/index.html">
 <meta property="og:site_name" content="侯晓丹的个人空间">
+<meta property="og:description" content="title: ios 状态栏设置date: 2017-11-23 13:52:27tags:— status setting 设置分为两种情况，一种是全局隐藏，一种是局部隐藏。 全局隐藏： target -&amp;gt;Deployment Info -&amp;gt; Status Bar style -&amp;gt; hidden status bar。局部隐藏分为两种情况：一： info.plist 文件中V">
+<meta property="og:updated_time" content="2017-11-23T06:25:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="侯晓丹的个人空间">
+<meta name="twitter:description" content="title: ios 状态栏设置date: 2017-11-23 13:52:27tags:— status setting 设置分为两种情况，一种是全局隐藏，一种是局部隐藏。 全局隐藏： target -&amp;gt;Deployment Info -&amp;gt; Status Bar style -&amp;gt; hidden status bar。局部隐藏分为两种情况：一： info.plist 文件中V">
   
     <link rel="alternate" href="/atom.xml" title="侯晓丹的个人空间" type="application/atom+xml">
   
@@ -63,102 +67,52 @@
   </div>
 </div>
 
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap animated rubberBand">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/11/23/ios-状态栏设置/" class="archive-article-date">
+        <section id="main"><article id="post-ios-状态栏设置" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/23/ios-状态栏设置/" class="article-date">
   <time class="post-time" datetime="2017-11-23T05:52:27.000Z" itemprop="datePublished">
     <span class="post-month">11月</span><br/>
     <span class="post-day">23</span>
   </time>
 </a>
-      
-    </header>
+   
   </div>
-</article>
-  
+  <div class="article-inner">
     
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/11/22/mac-设置启动项/" class="archive-article-date">
-  <time class="post-time" datetime="2017-11-22T02:17:50.000Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">22</span>
-  </time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/22/mac-设置启动项/">mac 设置启动项</a>
-    </h1>
-  
+        <hr>
+<p>title: ios 状态栏设置<br>date: 2017-11-23 13:52:27<br>tags:<br>— status setting</p>
+<p>设置分为两种情况，一种是全局隐藏，一种是局部隐藏。</p>
+<p>全局隐藏： target -&gt;Deployment Info -&gt; Status Bar style -&gt; hidden status bar。<br>局部隐藏分为两种情况：<br>一：</p>
+<p>info.plist 文件中View controller-based status bar appearance的设置是YES。说明viewController对status的设置优先级高于application。（如果没有这个配置的话，需要自己手动添加）<br>其次：在对应VC中调用<br>[self prefersStatusBarHidden];</p>
+<p>-(BOOL)prefersStatusBarHidden{<br>return YES;<br>}<br>二：</p>
+<p>如果 View controller-based status bar appearance 设置为NO，则上述方法调用则失效，可调用<br>隐藏掉状态栏<br>[[UIApplication sharedApplication] setStatusBarHidden:YES];<br>展示状态栏：<br>[[UIApplication sharedApplication] setStatusBarHidden:NO];</p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/11/09/sourcetree-推送问题/" class="archive-article-date">
-  <time class="post-time" datetime="2017-11-09T02:51:28.000Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">09</span>
-  </time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/09/sourcetree-推送问题/">sourcetree 推送问题</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/11/08/创建一个私有库/" class="archive-article-date">
-  <time class="post-time" datetime="2017-11-08T03:45:05.000Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">08</span>
-  </time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="noblewoman.github.io/2017/11/23/ios-状态栏设置/" data-id="cjac3hd930000fbs6cmewbsnd" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/08/创建一个私有库/">创建一个私有库</a>
-    </h1>
-  
-
-    </header>
+      
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/11/22/mac-设置启动项/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">mac 设置启动项</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
+
 
 
 </section>
