@@ -12,7 +12,7 @@
 <meta property="og:url" content="noblewoman.github.io/2017/11/23/ios-状态栏设置/index.html">
 <meta property="og:site_name" content="侯晓丹的个人空间">
 <meta property="og:description" content="设置分为两种情况，一种是全局隐藏，一种是局部隐藏。 全局隐藏： target -&amp;gt;Deployment Info -&amp;gt; Status Bar style -&amp;gt; hidden status bar。局部隐藏分为两种情况：一： info.plist 文件中View controller-based status bar appearance的设置是YES。说明viewControl">
-<meta property="og:updated_time" content="2017-11-23T06:30:14.000Z">
+<meta property="og:updated_time" content="2017-11-23T06:32:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ios 状态栏设置">
 <meta name="twitter:description" content="设置分为两种情况，一种是全局隐藏，一种是局部隐藏。 全局隐藏： target -&amp;gt;Deployment Info -&amp;gt; Status Bar style -&amp;gt; hidden status bar。局部隐藏分为两种情况：一： info.plist 文件中View controller-based status bar appearance的设置是YES。说明viewControl">
@@ -100,7 +100,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <!--<more>-->
+        <a id="more"></a>
 <p>设置分为两种情况，一种是全局隐藏，一种是局部隐藏。</p>
 <p>全局隐藏： target -&gt;Deployment Info -&gt; Status Bar style -&gt; hidden status bar。<br>局部隐藏分为两种情况：<br>一：</p>
 <p>info.plist 文件中View controller-based status bar appearance的设置是YES。说明viewController对status的设置优先级高于application。（如果没有这个配置的话，需要自己手动添加）<br>其次：在对应VC中调用<br>[self prefersStatusBarHidden];</p>
@@ -110,7 +110,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="noblewoman.github.io/2017/11/23/ios-状态栏设置/" data-id="cjac3mhan0000hss6dsqi0j3s" class="article-share-link">Share</a>
+      <a data-url="noblewoman.github.io/2017/11/23/ios-状态栏设置/" data-id="cjac3pr4w0000jrs6uizavyzf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/status-setting/">status setting</a></li></ul>
