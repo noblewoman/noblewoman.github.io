@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="noblewoman.github.io">
-  <title>Archives: 2017/11 | 侯晓丹的个人空间</title>
+  <title>ios中使用MD5进行加密 | 侯晓丹的个人空间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="侯晓丹的个人空间">
-<meta property="og:url" content="noblewoman.github.io/archives/2017/11/index.html">
+  <meta name="description" content="做视频缓存时需要对缓存路径进行加密，用到了MD5加密，就查了相关的资料，现记录一下。  首先需要引入头文件 #import    对NSString 进行加密两种方式：12345678910- (NSString *)md5:(NSString *)inputString&amp;#123;const char *cString = [inputString UTF8String];unsigned ch">
+<meta name="keywords" content="MD5  NSString NSData">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ios中使用MD5进行加密">
+<meta property="og:url" content="noblewoman.github.io/2017/11/28/ios中使用MD5进行加密/index.html">
 <meta property="og:site_name" content="侯晓丹的个人空间">
+<meta property="og:description" content="做视频缓存时需要对缓存路径进行加密，用到了MD5加密，就查了相关的资料，现记录一下。  首先需要引入头文件 #import    对NSString 进行加密两种方式：12345678910- (NSString *)md5:(NSString *)inputString&amp;#123;const char *cString = [inputString UTF8String];unsigned ch">
+<meta property="og:updated_time" content="2017-11-28T02:31:06.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="侯晓丹的个人空间">
+<meta name="twitter:title" content="ios中使用MD5进行加密">
+<meta name="twitter:description" content="做视频缓存时需要对缓存路径进行加密，用到了MD5加密，就查了相关的资料，现记录一下。  首先需要引入头文件 #import    对NSString 进行加密两种方式：12345678910- (NSString *)md5:(NSString *)inputString&amp;#123;const char *cString = [inputString UTF8String];unsigned ch">
   
     <link rel="alternative" href="/atom.xml" title="侯晓丹的个人空间" type="application/atom+xml">
   
@@ -133,36 +138,65 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-ios中使用MD5进行加密" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/28/ios中使用MD5进行加密/" class="archive-article-date">
-  	<time datetime="2017-11-28T02:06:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-28</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/28/ios中使用MD5进行加密/">ios中使用MD5进行加密</a>
+    <h1 class="article-title" itemprop="name">
+      ios中使用MD5进行加密
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/11/28/ios中使用MD5进行加密/" class="archive-article-date">
+  	<time datetime="2017-11-28T02:06:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>做视频缓存时需要对缓存路径进行加密，用到了MD5加密，就查了相关的资料，现记录一下。</p>
+<ul>
+<li>首先需要引入头文件 #import <commoncrypto commondigest.h=""></commoncrypto></li>
+</ul>
+<ol>
+<li>对NSString 进行加密两种方式：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">- (NSString *)md5:(NSString *)inputString&#123;</div><div class="line">const char *cString = [inputString UTF8String];</div><div class="line">unsigned char digest[CC_MD5_DIGEST_LENGTH];</div><div class="line">CC_MD5(cString, (CC_LONG)strlen(cString), digest);</div><div class="line">NSMutableString *outputString = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH *2];</div><div class="line">for (int i = 0; i &lt; CC_MD5_DIGEST_LENGTH; i ++) &#123;</div><div class="line">[outputString appendFormat:@&quot;%02x&quot;,digest[i]];</div><div class="line">&#125;</div><div class="line">return outputString;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>方法二：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">- (NSString *)md51:(NSString *)inputString1&#123;</div><div class="line">const char *cString = [inputString1 UTF8String];</div><div class="line">unsigned char r [CC_MD5_DIGEST_LENGTH];</div><div class="line">CC_MD5(cString, (CC_LONG)strlen(cString), r);</div><div class="line">return [NSString stringWithFormat:@&quot;%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x&quot;,</div><div class="line">r[0],r[1],r[2], r[3], r[4], r[5], r[6], r[7], r[8], r[9], r[10],</div><div class="line">r[11], r[12], r[13], r[14], r[15]];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>对NSData进行加密<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">- (NSString *)md5:(NSData *)data&#123;</div><div class="line">unsigned char r[CC_MD5_DIGEST_LENGTH];</div><div class="line">CC_MD5(data.bytes,(CC_LONG)data.length, r);</div><div class="line">return [NSString stringWithFormat:@&quot;%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x&quot;,</div><div class="line">r[0], r[1], r[2], r[3], r[4], r[5], r[6], r[7], r[8], r[9], r[10],</div><div class="line">r[11], r[12], r[13], r[14], r[15]];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>感谢您对我的认同<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -174,149 +208,106 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http:noblewoman.github.io/2017/11/28/ios中使用MD5进行加密/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/23/ios-状态栏设置/" class="archive-article-date">
-  	<time datetime="2017-11-23T05:52:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-23</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2017/11/23/ios-状态栏设置/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ios 状态栏设置</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/23/ios-状态栏设置/">ios 状态栏设置</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">status setting</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/22/mac-设置启动项/" class="archive-article-date">
-  	<time datetime="2017-11-22T02:17:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/22/mac-设置启动项/">mac 设置启动项</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/09/sourcetree-推送问题/" class="archive-article-date">
-  	<time datetime="2017-11-09T02:51:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/09/sourcetree-推送问题/">sourcetree 推送问题</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">sourcetree git push</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/08/创建一个私有库/" class="archive-article-date">
-  	<time datetime="2017-11-08T03:45:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/08/创建一个私有库/">创建一个私有库</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -339,8 +330,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
