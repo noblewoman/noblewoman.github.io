@@ -15,7 +15,7 @@
 <meta property="og:url" content="noblewoman.github.io/2017/11/23/ios-状态栏设置/index.html">
 <meta property="og:site_name" content="侯晓丹的个人空间">
 <meta property="og:description" content="设置分为两种情况，一种是全局隐藏，一种是局部隐藏。 全局隐藏： target -&amp;gt;Deployment Info -&amp;gt; Status Bar style -&amp;gt; hidden status bar。局部隐藏分为两种情况：一： info.plist 文件中View controller-based status bar appearance的设置是YES。说明viewControl">
-<meta property="og:updated_time" content="2017-11-23T06:32:42.000Z">
+<meta property="og:updated_time" content="2017-11-28T02:38:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ios 状态栏设置">
 <meta name="twitter:description" content="设置分为两种情况，一种是全局隐藏，一种是局部隐藏。 全局隐藏： target -&amp;gt;Deployment Info -&amp;gt; Status Bar style -&amp;gt; hidden status bar。局部隐藏分为两种情况：一： info.plist 文件中View controller-based status bar appearance的设置是YES。说明viewControl">
@@ -161,9 +161,10 @@
         <a id="more"></a>
 <p>设置分为两种情况，一种是全局隐藏，一种是局部隐藏。</p>
 <p>全局隐藏： target -&gt;Deployment Info -&gt; Status Bar style -&gt; hidden status bar。<br>局部隐藏分为两种情况：<br>一：</p>
-<p>info.plist 文件中View controller-based status bar appearance的设置是YES。说明viewController对status的设置优先级高于application。（如果没有这个配置的话，需要自己手动添加）<br>其次：在对应VC中调用<br>[self prefersStatusBarHidden];</p>
-<p>-(BOOL)prefersStatusBarHidden{<br>return YES;<br>}<br>二：</p>
-<p>如果 View controller-based status bar appearance 设置为NO，则上述方法调用则失效，可调用<br>隐藏掉状态栏<br>[[UIApplication sharedApplication] setStatusBarHidden:YES];<br>展示状态栏：<br>[[UIApplication sharedApplication] setStatusBarHidden:NO];</p>
+<p>info.plist 文件中View controller-based status bar appearance的设置是YES。说明viewController对status的设置优先级高于application。（如果没有这个配置的话，需要自己手动添加）<br>其次：在对应VC中调用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[self prefersStatusBarHidden];</div><div class="line"></div><div class="line">-(BOOL)prefersStatusBarHidden&#123;</div><div class="line">    return YES;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>二：</p>
+<p>如果 View controller-based status bar appearance 设置为NO，则上述方法调用则失效，可调用<br>隐藏掉状态栏<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[[UIApplication sharedApplication] setStatusBarHidden:YES];</div></pre></td></tr></table></figure></p>
+<p>展示状态栏：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[[UIApplication sharedApplication] setStatusBarHidden:NO];</div></pre></td></tr></table></figure></p>
 
       
 
@@ -401,7 +402,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MD5  NSString NSData</a>
+                <a href="javascript:void(0)" class="js-tag color5">MD5 NSString NSData</a>
               </li>
              
               <li class="article-tag-list-item">

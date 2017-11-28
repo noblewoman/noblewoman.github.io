@@ -157,14 +157,15 @@
       
         <p>做视频缓存时需要对缓存路径进行加密，用到了MD5加密，就查了相关的资料，现记录一下。</p>
 <ul>
-<li>首先需要引入头文件 #import <commoncrypto commondigest.h=""></commoncrypto></li>
+<li>首先需要引入头文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#import &lt;CommonCrypto/CommonDigest.h&gt;</div></pre></td></tr></table></figure>
+</li>
 </ul>
 <ol>
-<li>对NSString 进行加密两种方式：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">- (NSString *)md5:(NSString *)inputString&#123;</div><div class="line">const char *cString = [inputString UTF8String];</div><div class="line">unsigned char digest[CC_MD5_DIGEST_LENGTH];</div><div class="line">CC_MD5(cString, (CC_LONG)strlen(cString), digest);</div><div class="line">NSMutableString *outputString = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH *2];</div><div class="line">for (int i = 0; i &lt; CC_MD5_DIGEST_LENGTH; i ++) &#123;</div><div class="line">[outputString appendFormat:@&quot;%02x&quot;,digest[i]];</div><div class="line">&#125;</div><div class="line">return outputString;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<li>对NSString 进行加密两种方式：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">- (NSString *)md5:(NSString *)inputString&#123;</div><div class="line">    const char *cString = [inputString UTF8String];</div><div class="line">    unsigned char digest[CC_MD5_DIGEST_LENGTH];</div><div class="line">    CC_MD5(cString, (CC_LONG)strlen(cString), digest);</div><div class="line">    NSMutableString *outputString = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH *2];</div><div class="line">    for (int i = 0; i &lt; CC_MD5_DIGEST_LENGTH; i ++) &#123;</div><div class="line">        [outputString appendFormat:@&quot;%02x&quot;,digest[i]];</div><div class="line">    &#125;</div><div class="line">    return outputString;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>方法二：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">- (NSString *)md51:(NSString *)inputString1&#123;</div><div class="line">const char *cString = [inputString1 UTF8String];</div><div class="line">unsigned char r [CC_MD5_DIGEST_LENGTH];</div><div class="line">CC_MD5(cString, (CC_LONG)strlen(cString), r);</div><div class="line">return [NSString stringWithFormat:@&quot;%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x&quot;,</div><div class="line">r[0],r[1],r[2], r[3], r[4], r[5], r[6], r[7], r[8], r[9], r[10],</div><div class="line">r[11], r[12], r[13], r[14], r[15]];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>对NSData进行加密<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">- (NSString *)md5:(NSData *)data&#123;</div><div class="line">unsigned char r[CC_MD5_DIGEST_LENGTH];</div><div class="line">CC_MD5(data.bytes,(CC_LONG)data.length, r);</div><div class="line">return [NSString stringWithFormat:@&quot;%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x&quot;,</div><div class="line">r[0], r[1], r[2], r[3], r[4], r[5], r[6], r[7], r[8], r[9], r[10],</div><div class="line">r[11], r[12], r[13], r[14], r[15]];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>方法二：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">- (NSString *)md51:(NSString *)inputString1&#123;</div><div class="line">    const char *cString = [inputString1 UTF8String];</div><div class="line">    unsigned char r [CC_MD5_DIGEST_LENGTH];</div><div class="line">    CC_MD5(cString, (CC_LONG)strlen(cString), r);</div><div class="line">    return [NSString stringWithFormat:@&quot;%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x&quot;,</div><div class="line">    r[0],r[1],r[2], r[3], r[4], r[5], r[6], r[7], r[8], r[9], r[10],</div><div class="line">    r[11], r[12], r[13], r[14], r[15]];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>对NSData进行加密<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">- (NSString *)md5:(NSData *)data&#123;</div><div class="line">    unsigned char r[CC_MD5_DIGEST_LENGTH];</div><div class="line">    CC_MD5(data.bytes,(CC_LONG)data.length, r);</div><div class="line">    return [NSString stringWithFormat:@&quot;%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x&quot;,</div><div class="line">    r[0], r[1], r[2], r[3], r[4], r[5], r[6], r[7], r[8], r[9], r[10],</div><div class="line">    r[11], r[12], r[13], r[14], r[15]];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 
       
 
@@ -178,7 +179,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MD5  NSString NSData</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">MD5 NSString NSData</a>
         		</li>
       		
 		</ul>
@@ -241,9 +242,10 @@
         <a id="more"></a>
 <p>设置分为两种情况，一种是全局隐藏，一种是局部隐藏。</p>
 <p>全局隐藏： target -&gt;Deployment Info -&gt; Status Bar style -&gt; hidden status bar。<br>局部隐藏分为两种情况：<br>一：</p>
-<p>info.plist 文件中View controller-based status bar appearance的设置是YES。说明viewController对status的设置优先级高于application。（如果没有这个配置的话，需要自己手动添加）<br>其次：在对应VC中调用<br>[self prefersStatusBarHidden];</p>
-<p>-(BOOL)prefersStatusBarHidden{<br>return YES;<br>}<br>二：</p>
-<p>如果 View controller-based status bar appearance 设置为NO，则上述方法调用则失效，可调用<br>隐藏掉状态栏<br>[[UIApplication sharedApplication] setStatusBarHidden:YES];<br>展示状态栏：<br>[[UIApplication sharedApplication] setStatusBarHidden:NO];</p>
+<p>info.plist 文件中View controller-based status bar appearance的设置是YES。说明viewController对status的设置优先级高于application。（如果没有这个配置的话，需要自己手动添加）<br>其次：在对应VC中调用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[self prefersStatusBarHidden];</div><div class="line"></div><div class="line">-(BOOL)prefersStatusBarHidden&#123;</div><div class="line">    return YES;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>二：</p>
+<p>如果 View controller-based status bar appearance 设置为NO，则上述方法调用则失效，可调用<br>隐藏掉状态栏<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[[UIApplication sharedApplication] setStatusBarHidden:YES];</div></pre></td></tr></table></figure></p>
+<p>展示状态栏：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[[UIApplication sharedApplication] setStatusBarHidden:NO];</div></pre></td></tr></table></figure></p>
 
       
 
@@ -602,7 +604,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MD5  NSString NSData</a>
+                <a href="javascript:void(0)" class="js-tag color5">MD5 NSString NSData</a>
               </li>
              
               <li class="article-tag-list-item">
