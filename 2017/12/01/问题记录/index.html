@@ -6,19 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="noblewoman.github.io">
-  <title>ios中使用MD5进行加密 | 侯晓丹的个人空间</title>
+  <title>问题记录 | 侯晓丹的个人空间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="做视频缓存时需要对缓存路径进行加密，用到了MD5加密，就查了相关的资料，现记录一下。  首先需要引入头文件1#import &amp;lt;CommonCrypto/CommonDigest.h&amp;gt;    对NSString 进行加密两种方式：12345678910- (NSString *)md5:(NSString *)inputString&amp;#123;    const char *cStrin">
-<meta name="keywords" content="MD5 NSString NSData">
+  <meta name="description" content="xcode编译报错：property with ‘retain(or strong)’ attribute must be of object type 编译报错行 @property (nonatomic, strong) dispatch_queue_t  ioQueue; 原因：引入的SDK低于6.0时， dispatch_queue_t ARC没有托管。出现错误 修复：将原来的声明改为：1">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ios中使用MD5进行加密">
-<meta property="og:url" content="noblewoman.github.io/2017/11/28/ios中使用MD5进行加密/index.html">
+<meta property="og:title" content="问题记录">
+<meta property="og:url" content="noblewoman.github.io/2017/12/01/问题记录/index.html">
 <meta property="og:site_name" content="侯晓丹的个人空间">
-<meta property="og:description" content="做视频缓存时需要对缓存路径进行加密，用到了MD5加密，就查了相关的资料，现记录一下。  首先需要引入头文件1#import &amp;lt;CommonCrypto/CommonDigest.h&amp;gt;    对NSString 进行加密两种方式：12345678910- (NSString *)md5:(NSString *)inputString&amp;#123;    const char *cStrin">
-<meta property="og:updated_time" content="2017-11-28T02:41:02.000Z">
+<meta property="og:description" content="xcode编译报错：property with ‘retain(or strong)’ attribute must be of object type 编译报错行 @property (nonatomic, strong) dispatch_queue_t  ioQueue; 原因：引入的SDK低于6.0时， dispatch_queue_t ARC没有托管。出现错误 修复：将原来的声明改为：1">
+<meta property="og:updated_time" content="2017-12-01T02:57:56.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ios中使用MD5进行加密">
-<meta name="twitter:description" content="做视频缓存时需要对缓存路径进行加密，用到了MD5加密，就查了相关的资料，现记录一下。  首先需要引入头文件1#import &amp;lt;CommonCrypto/CommonDigest.h&amp;gt;    对NSString 进行加密两种方式：12345678910- (NSString *)md5:(NSString *)inputString&amp;#123;    const char *cStrin">
+<meta name="twitter:title" content="问题记录">
+<meta name="twitter:description" content="xcode编译报错：property with ‘retain(or strong)’ attribute must be of object type 编译报错行 @property (nonatomic, strong) dispatch_queue_t  ioQueue; 原因：引入的SDK低于6.0时， dispatch_queue_t ARC没有托管。出现错误 修复：将原来的声明改为：1">
   
     <link rel="alternative" href="/atom.xml" title="侯晓丹的个人空间" type="application/atom+xml">
   
@@ -138,37 +137,44 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-ios中使用MD5进行加密" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-问题记录" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      ios中使用MD5进行加密
+      问题记录
     </h1>
   
 
         
-        <a href="/2017/11/28/ios中使用MD5进行加密/" class="archive-article-date">
-  	<time datetime="2017-11-28T02:06:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-28</time>
+        <a href="/2017/12/01/问题记录/" class="archive-article-date">
+  	<time datetime="2017-12-01T02:17:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-01</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>做视频缓存时需要对缓存路径进行加密，用到了MD5加密，就查了相关的资料，现记录一下。</p>
-<ul>
-<li>首先需要引入头文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#import &lt;CommonCrypto/CommonDigest.h&gt;</div></pre></td></tr></table></figure>
+        <h3 id="xcode编译报错：property-with-‘retain-or-strong-’-attribute-must-be-of-object-type"><a href="#xcode编译报错：property-with-‘retain-or-strong-’-attribute-must-be-of-object-type" class="headerlink" title="xcode编译报错：property with ‘retain(or strong)’ attribute must be of object type"></a>xcode编译报错：property with ‘retain(or strong)’ attribute must be of object type</h3><ul>
+<li>编译报错行 @property (nonatomic, strong) dispatch_queue_t  ioQueue;</li>
+<li>原因：引入的SDK低于6.0时， dispatch_queue_t ARC没有托管。出现错误</li>
+<li>修复：将原来的声明改为：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#if OS_OBJECT_USE_OBJC</div><div class="line">@property (nonatomic, strong) dispatch_queue_t          ioQueue;</div><div class="line">#else</div><div class="line">@property (nonatomic, assign) dispatch_queue_t          ioQueue;</div><div class="line">#endif</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<ol>
-<li>对NSString 进行加密两种方式：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">- (NSString *)md5:(NSString *)inputString&#123;</div><div class="line">    const char *cString = [inputString UTF8String];</div><div class="line">    unsigned char digest[CC_MD5_DIGEST_LENGTH];</div><div class="line">    CC_MD5(cString, (CC_LONG)strlen(cString), digest);</div><div class="line">    NSMutableString *outputString = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH *2];</div><div class="line">    for (int i = 0; i &lt; CC_MD5_DIGEST_LENGTH; i ++) &#123;</div><div class="line">        [outputString appendFormat:@&quot;%02x&quot;,digest[i]];</div><div class="line">    &#125;</div><div class="line">    return outputString;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>方法二：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">- (NSString *)md51:(NSString *)inputString1&#123;</div><div class="line">    const char *cString = [inputString1 UTF8String];</div><div class="line">    unsigned char r [CC_MD5_DIGEST_LENGTH];</div><div class="line">    CC_MD5(cString, (CC_LONG)strlen(cString), r);</div><div class="line">    return [NSString                stringWithFormat:@&quot;%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x&quot;,</div><div class="line">    r[0],r[1],r[2], r[3], r[4], r[5], r[6], r[7], r[8], r[9], r[10],</div><div class="line">    r[11], r[12], r[13], r[14], r[15]];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>对NSData进行加密<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">- (NSString *)md5:(NSData *)data&#123;</div><div class="line">    unsigned char r[CC_MD5_DIGEST_LENGTH];</div><div class="line">    CC_MD5(data.bytes,(CC_LONG)data.length, r);</div><div class="line">    return [NSString stringWithFormat:@&quot;%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x&quot;,</div><div class="line">    r[0], r[1], r[2], r[3], r[4], r[5], r[6], r[7], r[8], r[9], r[10],</div><div class="line">    r[11], r[12], r[13], r[14], r[15]];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>或者pod update SDK也可解决。</p>
+<h3 id="pod私有库里图片资源增加gif遇到的问题"><a href="#pod私有库里图片资源增加gif遇到的问题" class="headerlink" title="pod私有库里图片资源增加gif遇到的问题"></a>pod私有库里图片资源增加gif遇到的问题</h3><ul>
+<li>首先在podspec文件里修改s.resource</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">s.resources = &apos;Demo/Assets/*.&#123;png,gif&#125;&apos;</div></pre></td></tr></table></figure>
+<ul>
+<li>将gif资源添加到Assets路径下</li>
+<li>pod update Demo库</li>
+</ul>
+<h4 id="如何校验是否已经成功引入了gif图？"><a href="#如何校验是否已经成功引入了gif图？" class="headerlink" title="如何校验是否已经成功引入了gif图？"></a>如何校验是否已经成功引入了gif图？</h4><ul>
+<li>找到pods-&gt;Targets Support Files -&gt;Pods-Demo -&gt;Pods-Demo-resources.sh 文件，搜索是否有刚才引入的gif图即可验证。</li>
+</ul>
 
       
 
@@ -198,17 +204,6 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">MD5 NSString NSData</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
 
       
@@ -259,7 +254,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http:noblewoman.github.io/2017/11/28/ios中使用MD5进行加密/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http:noblewoman.github.io/2017/12/01/问题记录/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -273,18 +268,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/12/01/问题记录/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          问题记录
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/11/23/ios-状态栏设置/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">ios 状态栏设置</div>
+    <a href="/2017/11/28/ios中使用MD5进行加密/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ios中使用MD5进行加密</div>
       <i class="icon-circle-right"></i>
     </a>
   
