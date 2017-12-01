@@ -6,14 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="noblewoman.github.io">
-  <title>Archives | 侯晓丹的个人空间</title>
+  <title>statfs 获取磁盘容量相关 | 侯晓丹的个人空间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="侯晓丹的个人空间">
-<meta property="og:url" content="noblewoman.github.io/archives/index.html">
+  <meta name="description" content="最近在做缓存相关，这里简单记录一下statfs用法： 12345678910111213141516171819202122struct statfs &amp;#123;short    f_otype;        /* TEMPORARY SHADOW COPY OF f_type */short    f_oflags;        /* TEMPORARY SHADOW COPY OF f_">
+<meta property="og:type" content="article">
+<meta property="og:title" content="statfs 获取磁盘容量相关">
+<meta property="og:url" content="noblewoman.github.io/2017/12/01/statfs-获取磁盘容量相关/index.html">
 <meta property="og:site_name" content="侯晓丹的个人空间">
+<meta property="og:description" content="最近在做缓存相关，这里简单记录一下statfs用法： 12345678910111213141516171819202122struct statfs &amp;#123;short    f_otype;        /* TEMPORARY SHADOW COPY OF f_type */short    f_oflags;        /* TEMPORARY SHADOW COPY OF f_">
+<meta property="og:updated_time" content="2017-12-01T03:16:57.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="侯晓丹的个人空间">
+<meta name="twitter:title" content="statfs 获取磁盘容量相关">
+<meta name="twitter:description" content="最近在做缓存相关，这里简单记录一下statfs用法： 12345678910111213141516171819202122struct statfs &amp;#123;short    f_otype;        /* TEMPORARY SHADOW COPY OF f_type */short    f_oflags;        /* TEMPORARY SHADOW COPY OF f_">
   
     <link rel="alternative" href="/atom.xml" title="侯晓丹的个人空间" type="application/atom+xml">
   
@@ -133,244 +137,165 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-statfs-获取磁盘容量相关" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      statfs 获取磁盘容量相关
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/12/01/statfs-获取磁盘容量相关/" class="archive-article-date">
+
+        
+        <a href="/2017/12/01/statfs-获取磁盘容量相关/" class="archive-article-date">
   	<time datetime="2017-12-01T03:05:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-01</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/12/01/statfs-获取磁盘容量相关/">statfs 获取磁盘容量相关</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近在做缓存相关，这里简单记录一下statfs用法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">struct statfs &#123;</div><div class="line">short    f_otype;        /* TEMPORARY SHADOW COPY OF f_type */</div><div class="line">short    f_oflags;        /* TEMPORARY SHADOW COPY OF f_flags */</div><div class="line">long    f_bsize;        /* fundamental file system block size */</div><div class="line">long    f_iosize;        /* optimal transfer block size */</div><div class="line">long    f_blocks;        /* total data blocks in file system */</div><div class="line">long    f_bfree;        /* free blocks in fs */</div><div class="line">long    f_bavail;        /* free blocks avail to non-superuser */</div><div class="line">long    f_files;        /* total file nodes in file system */</div><div class="line">long    f_ffree;        /* free file nodes in fs */</div><div class="line">fsid_t    f_fsid;            /* file system id */</div><div class="line">uid_t    f_owner;        /* user that mounted the filesystem */</div><div class="line">short    f_reserved1;    /* spare for later */</div><div class="line">short    f_type;            /* type of filesystem */</div><div class="line">long    f_flags;        /* copy of mount exported flags */</div><div class="line">long    f_reserved2[2];    /* reserved for future use */</div><div class="line">char    f_fstypename[MFSNAMELEN]; /* fs type name */</div><div class="line">char    f_mntonname[MNAMELEN];    /* directory on which mounted */</div><div class="line">char    f_mntfromname[MNAMELEN];/* mounted filesystem */</div><div class="line">char    f_reserved3;    /* For alignment */</div><div class="line">long    f_reserved4[4];    /* For future use */</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<ul>
+<li>获取总磁盘容量：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">- (unsigned long long)getDiskTotalSize&#123;</div><div class="line">    struct statfs buf;</div><div class="line">    unsigned long long totalSpace = -1;</div><div class="line">    if (statfs(&quot;/var&quot;, &amp;buf) &gt;= 0) &#123;</div><div class="line">    // buf.f_bsize 经过优化后的传输块的大小； f_blocks: /* total data blocks in file system */</div><div class="line">    totalSpace = (long long)(buf.f_bsize * buf.f_blocks);</div><div class="line">    &#125;</div><div class="line">    return totalSpace;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>获取可用磁盘容量</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">- (unsigned long long)getDiskFreeSize&#123;</div><div class="line">    struct statfs buf;</div><div class="line">    unsigned long long freeSpace = -1;</div><div class="line">    if (statfs(&quot;/var&quot;, &amp;buf) &gt;= 0) &#123;</div><div class="line">    // buf.f_bsize 经过优化后的传输块的大小； f_bfree: /* free blocks in fs */</div><div class="line">    freeSpace = (long long)(buf.f_bsize * buf.f_bfree);</div><div class="line">    &#125;</div><div class="line">    return freeSpace;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>感谢您对我的认同<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http:noblewoman.github.io/2017/12/01/statfs-获取磁盘容量相关/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/12/01/问题记录/" class="archive-article-date">
-  	<time datetime="2017-12-01T02:17:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-01</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2017/12/01/问题记录/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">问题记录</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/12/01/问题记录/">问题记录</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/28/ios中使用MD5进行加密/" class="archive-article-date">
-  	<time datetime="2017-11-28T02:06:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/28/ios中使用MD5进行加密/">ios中使用MD5进行加密</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">MD5 NSString NSData</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/23/ios-状态栏设置/" class="archive-article-date">
-  	<time datetime="2017-11-23T05:52:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/23/ios-状态栏设置/">ios 状态栏设置</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">status setting</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/22/mac-设置启动项/" class="archive-article-date">
-  	<time datetime="2017-11-22T02:17:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/22/mac-设置启动项/">mac 设置启动项</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/09/sourcetree-推送问题/" class="archive-article-date">
-  	<time datetime="2017-11-09T02:51:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/09/sourcetree-推送问题/">sourcetree 推送问题</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">sourcetree git push</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/08/创建一个私有库/" class="archive-article-date">
-  	<time datetime="2017-11-08T03:45:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/08/创建一个私有库/">创建一个私有库</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -393,8 +318,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
