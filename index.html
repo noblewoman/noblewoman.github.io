@@ -227,13 +227,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="xcode编译报错：property-with-‘retain-or-strong-’-attribute-must-be-of-object-type"><a href="#xcode编译报错：property-with-‘retain-or-strong-’-attribute-must-be-of-object-type" class="headerlink" title="xcode编译报错：property with ‘retain(or strong)’ attribute must be of object type"></a>xcode编译报错：property with ‘retain(or strong)’ attribute must be of object type</h3><ul>
+        <h3 id="xcode编译报错之：property-with-‘retain-or-strong-’-attribute-must-be-of-object-type"><a href="#xcode编译报错之：property-with-‘retain-or-strong-’-attribute-must-be-of-object-type" class="headerlink" title="xcode编译报错之：property with ‘retain(or strong)’ attribute must be of object type"></a>xcode编译报错之：property with ‘retain(or strong)’ attribute must be of object type</h3><ul>
 <li>编译报错行 @property (nonatomic, strong) dispatch_queue_t  ioQueue;</li>
 <li>原因：引入的SDK低于6.0时， dispatch_queue_t ARC没有托管。出现错误</li>
 <li>修复：将原来的声明改为：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#if OS_OBJECT_USE_OBJC</div><div class="line">@property (nonatomic, strong) dispatch_queue_t          ioQueue;</div><div class="line">#else</div><div class="line">@property (nonatomic, assign) dispatch_queue_t          ioQueue;</div><div class="line">#endif</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>或者pod update SDK也可解决。</p>
+<h3 id="xcode编译报错之：The-current-deployment-target-does-not-support-automated-weak-references"><a href="#xcode编译报错之：The-current-deployment-target-does-not-support-automated-weak-references" class="headerlink" title="xcode编译报错之：The current deployment target does not support automated __weak references"></a>xcode编译报错之：The current deployment target does not support automated __weak references</h3><ul>
+<li>前提：工程里引入了各种sdk， 工程的development info 为7.0（若&lt; 5.0, 可以尝试设置development info 方式试一下能不能解决。）</li>
+<li>原因：__weak只支持ios5以后的项目</li>
+<li>解决：podfile中增加设置：  platform :ios, ‘8.0’， pod update 解决。</li>
+</ul>
 <h3 id="pod私有库里图片资源增加gif遇到的问题"><a href="#pod私有库里图片资源增加gif遇到的问题" class="headerlink" title="pod私有库里图片资源增加gif遇到的问题"></a>pod私有库里图片资源增加gif遇到的问题</h3><ul>
 <li>首先在podspec文件里修改s.resource</li>
 </ul>
@@ -752,11 +757,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">status setting</a>
+                <a href="javascript:void(0)" class="js-tag color5">MD5 NSString NSData</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">MD5 NSString NSData</a>
+                <a href="javascript:void(0)" class="js-tag color5">status setting</a>
               </li>
              
               <li class="article-tag-list-item">
