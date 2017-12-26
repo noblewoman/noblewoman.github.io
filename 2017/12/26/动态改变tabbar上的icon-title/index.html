@@ -6,18 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="noblewoman.github.io">
-  <title>问题记录 | 侯晓丹的个人空间</title>
+  <title>动态改变tabbar上的icon &amp; title | 侯晓丹的个人空间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="xcode编译报错之：property with ‘retain(or strong)’ attribute must be of object type 编译报错行 @property (nonatomic, strong) dispatch_queue_t  ioQueue; 原因：引入的SDK低于6.0时， dispatch_queue_t ARC没有托管。出现错误 修复：将原来的声明改为：">
+  <meta name="description" content="服务端存储一个底部icon &amp;amp; title 的zip地址。 通过请求一个配置接口，拉取到新的配置，更新本地tabbar资源；没有新的配置，则使用本地默认配置。 将远程zip下载下来并缓存，使用ZipArchive进行解压。 实时更新tabbar显示。  ZipArchive 解压过程：12// 创建 ZipArchiveZipArchive *zipArchive = [[ZipArch">
 <meta property="og:type" content="article">
-<meta property="og:title" content="问题记录">
-<meta property="og:url" content="noblewoman.github.io/2017/12/01/问题记录/index.html">
+<meta property="og:title" content="动态改变tabbar上的icon &amp; title">
+<meta property="og:url" content="noblewoman.github.io/2017/12/26/动态改变tabbar上的icon-title/index.html">
 <meta property="og:site_name" content="侯晓丹的个人空间">
-<meta property="og:description" content="xcode编译报错之：property with ‘retain(or strong)’ attribute must be of object type 编译报错行 @property (nonatomic, strong) dispatch_queue_t  ioQueue; 原因：引入的SDK低于6.0时， dispatch_queue_t ARC没有托管。出现错误 修复：将原来的声明改为：">
-<meta property="og:updated_time" content="2017-12-15T03:04:33.000Z">
+<meta property="og:description" content="服务端存储一个底部icon &amp;amp; title 的zip地址。 通过请求一个配置接口，拉取到新的配置，更新本地tabbar资源；没有新的配置，则使用本地默认配置。 将远程zip下载下来并缓存，使用ZipArchive进行解压。 实时更新tabbar显示。  ZipArchive 解压过程：12// 创建 ZipArchiveZipArchive *zipArchive = [[ZipArch">
+<meta property="og:updated_time" content="2017-12-26T07:32:55.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="问题记录">
-<meta name="twitter:description" content="xcode编译报错之：property with ‘retain(or strong)’ attribute must be of object type 编译报错行 @property (nonatomic, strong) dispatch_queue_t  ioQueue; 原因：引入的SDK低于6.0时， dispatch_queue_t ARC没有托管。出现错误 修复：将原来的声明改为：">
+<meta name="twitter:title" content="动态改变tabbar上的icon &amp; title">
+<meta name="twitter:description" content="服务端存储一个底部icon &amp;amp; title 的zip地址。 通过请求一个配置接口，拉取到新的配置，更新本地tabbar资源；没有新的配置，则使用本地默认配置。 将远程zip下载下来并缓存，使用ZipArchive进行解压。 实时更新tabbar显示。  ZipArchive 解压过程：12// 创建 ZipArchiveZipArchive *zipArchive = [[ZipArch">
   
     <link rel="alternative" href="/atom.xml" title="侯晓丹的个人空间" type="application/atom+xml">
   
@@ -137,49 +137,36 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-问题记录" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-动态改变tabbar上的icon-title" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      问题记录
+      动态改变tabbar上的icon &amp; title
     </h1>
   
 
         
-        <a href="/2017/12/01/问题记录/" class="archive-article-date">
-  	<time datetime="2017-12-01T02:17:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-01</time>
+        <a href="/2017/12/26/动态改变tabbar上的icon-title/" class="archive-article-date">
+  	<time datetime="2017-12-26T07:28:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-26</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="xcode编译报错之：property-with-‘retain-or-strong-’-attribute-must-be-of-object-type"><a href="#xcode编译报错之：property-with-‘retain-or-strong-’-attribute-must-be-of-object-type" class="headerlink" title="xcode编译报错之：property with ‘retain(or strong)’ attribute must be of object type"></a>xcode编译报错之：property with ‘retain(or strong)’ attribute must be of object type</h3><ul>
-<li>编译报错行 @property (nonatomic, strong) dispatch_queue_t  ioQueue;</li>
-<li>原因：引入的SDK低于6.0时， dispatch_queue_t ARC没有托管。出现错误</li>
-<li>修复：将原来的声明改为：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#if OS_OBJECT_USE_OBJC</div><div class="line">@property (nonatomic, strong) dispatch_queue_t          ioQueue;</div><div class="line">#else</div><div class="line">@property (nonatomic, assign) dispatch_queue_t          ioQueue;</div><div class="line">#endif</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>或者pod update SDK也可解决。</p>
-<h3 id="xcode编译报错之：The-current-deployment-target-does-not-support-automated-weak-references"><a href="#xcode编译报错之：The-current-deployment-target-does-not-support-automated-weak-references" class="headerlink" title="xcode编译报错之：The current deployment target does not support automated __weak references"></a>xcode编译报错之：The current deployment target does not support automated __weak references</h3><ul>
-<li>前提：工程里引入了各种sdk， 工程的development info 为7.0（若&lt; 5.0, 可以尝试设置development info 方式试一下能不能解决。）</li>
-<li>原因：__weak只支持ios5以后的项目</li>
-<li>解决：podfile中增加设置：  platform :ios, ‘8.0’， pod update 解决。</li>
-</ul>
-<h3 id="pod私有库里图片资源增加gif遇到的问题"><a href="#pod私有库里图片资源增加gif遇到的问题" class="headerlink" title="pod私有库里图片资源增加gif遇到的问题"></a>pod私有库里图片资源增加gif遇到的问题</h3><ul>
-<li>首先在podspec文件里修改s.resource</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">s.resources = &apos;Demo/Assets/*.&#123;png,gif&#125;&apos;</div></pre></td></tr></table></figure>
-<ul>
-<li>将gif资源添加到Assets路径下</li>
-<li>pod update Demo库</li>
-</ul>
-<h4 id="如何校验是否已经成功引入了gif图？"><a href="#如何校验是否已经成功引入了gif图？" class="headerlink" title="如何校验是否已经成功引入了gif图？"></a>如何校验是否已经成功引入了gif图？</h4><ul>
-<li>找到pods-&gt;Targets Support Files -&gt;Pods-Demo -&gt;Pods-Demo-resources.sh 文件，搜索是否有刚才引入的gif图即可验证。</li>
-</ul>
+        <ol>
+<li>服务端存储一个底部icon &amp; title 的zip地址。</li>
+<li>通过请求一个配置接口，拉取到新的配置，更新本地tabbar资源；没有新的配置，则使用本地默认配置。</li>
+<li>将远程zip下载下来并缓存，使用ZipArchive进行解压。</li>
+<li>实时更新tabbar显示。</li>
+</ol>
+<h6 id="ZipArchive-解压过程："><a href="#ZipArchive-解压过程：" class="headerlink" title="ZipArchive 解压过程："></a>ZipArchive 解压过程：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 创建 ZipArchive</div><div class="line">ZipArchive *zipArchive = [[ZipArchive alloc] init];</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// 解压zip包：两种方式</div><div class="line">[zipArchive UnzipOpenFile:zipCacheUrl];</div><div class="line"></div><div class="line">[zipFile UnzipOpenFile:zipCacheUrl Password:@&quot;password&quot;];</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 解压后的文件保存到一个路径下：</div><div class="line">[zipArchive UnzipFileTo:cacheUrl overWrite:YES];</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 关闭zip</div><div class="line">[zipArchive UnzipCloseFile];</div></pre></td></tr></table></figure>
 
       
 
@@ -259,7 +246,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http:noblewoman.github.io/2017/12/01/问题记录/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http:noblewoman.github.io/2017/12/26/动态改变tabbar上的icon-title/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -273,18 +260,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/12/01/statfs-获取磁盘容量相关/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          statfs 获取磁盘容量相关
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/11/28/ios中使用MD5进行加密/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">ios中使用MD5进行加密</div>
+    <a href="/2017/12/01/statfs-获取磁盘容量相关/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">statfs 获取磁盘容量相关</div>
       <i class="icon-circle-right"></i>
     </a>
   

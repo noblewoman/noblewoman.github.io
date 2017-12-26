@@ -135,6 +135,78 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-动态改变tabbar上的icon-title" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/26/动态改变tabbar上的icon-title/">动态改变tabbar上的icon &amp; title</a>
+    </h1>
+  
+
+        
+        <a href="/2017/12/26/动态改变tabbar上的icon-title/" class="archive-article-date">
+  	<time datetime="2017-12-26T07:28:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>服务端存储一个底部icon &amp; title 的zip地址。</li>
+<li>通过请求一个配置接口，拉取到新的配置，更新本地tabbar资源；没有新的配置，则使用本地默认配置。</li>
+<li>将远程zip下载下来并缓存，使用ZipArchive进行解压。</li>
+<li>实时更新tabbar显示。</li>
+</ol>
+<h6 id="ZipArchive-解压过程："><a href="#ZipArchive-解压过程：" class="headerlink" title="ZipArchive 解压过程："></a>ZipArchive 解压过程：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 创建 ZipArchive</div><div class="line">ZipArchive *zipArchive = [[ZipArchive alloc] init];</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// 解压zip包：两种方式</div><div class="line">[zipArchive UnzipOpenFile:zipCacheUrl];</div><div class="line"></div><div class="line">[zipFile UnzipOpenFile:zipCacheUrl Password:@&quot;password&quot;];</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 解压后的文件保存到一个路径下：</div><div class="line">[zipArchive UnzipFileTo:cacheUrl overWrite:YES];</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 关闭zip</div><div class="line">[zipArchive UnzipCloseFile];</div></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/12/26/动态改变tabbar上的icon-title/">阅读全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-statfs-获取磁盘容量相关" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -757,15 +829,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">MD5 NSString NSData</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">status setting</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">sourcetree git push</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">MD5 NSString NSData</a>
               </li>
             
             <div class="clearfix"></div>
