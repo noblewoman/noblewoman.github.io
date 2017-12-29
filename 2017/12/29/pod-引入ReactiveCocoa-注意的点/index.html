@@ -6,19 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="noblewoman.github.io">
-  <title>sourcetree 推送问题 | 侯晓丹的个人空间</title>
+  <title>pod 引入ReactiveCocoa 注意的点 | 侯晓丹的个人空间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="背景：私有库里接入了腾讯云短视频SDK，搞完配置要推送到远程时，推送失败，提示：POST Git-receive-pack (chunked)。 原因：网上查找到一个比较靠谱的说法：This is a bug in git, when using https it will use chunked encoding for uploads above a certain size. those">
-<meta name="keywords" content="sourcetree git push">
+  <meta name="description" content="项目导入ReactiveCocoa时才发现其实它是分OC &amp;amp; Swift版本的。其中ReactiveCocoa适用于swift项目，ReactiveObjC适用于纯OC项目。记录下避免以后踩坑。  编辑podfile文件： 123456789101112platform :ios, &amp;apos;8.0&amp;apos;inhibit_all_warnings!// pod引入时需要添加这个，不引">
 <meta property="og:type" content="article">
-<meta property="og:title" content="sourcetree 推送问题">
-<meta property="og:url" content="noblewoman.github.io/2017/11/09/sourcetree-推送问题/index.html">
+<meta property="og:title" content="pod 引入ReactiveCocoa 注意的点">
+<meta property="og:url" content="noblewoman.github.io/2017/12/29/pod-引入ReactiveCocoa-注意的点/index.html">
 <meta property="og:site_name" content="侯晓丹的个人空间">
-<meta property="og:description" content="背景：私有库里接入了腾讯云短视频SDK，搞完配置要推送到远程时，推送失败，提示：POST Git-receive-pack (chunked)。 原因：网上查找到一个比较靠谱的说法：This is a bug in git, when using https it will use chunked encoding for uploads above a certain size. those">
-<meta property="og:updated_time" content="2017-11-09T03:45:13.000Z">
+<meta property="og:description" content="项目导入ReactiveCocoa时才发现其实它是分OC &amp;amp; Swift版本的。其中ReactiveCocoa适用于swift项目，ReactiveObjC适用于纯OC项目。记录下避免以后踩坑。  编辑podfile文件： 123456789101112platform :ios, &amp;apos;8.0&amp;apos;inhibit_all_warnings!// pod引入时需要添加这个，不引">
+<meta property="og:updated_time" content="2017-12-29T07:13:44.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="sourcetree 推送问题">
-<meta name="twitter:description" content="背景：私有库里接入了腾讯云短视频SDK，搞完配置要推送到远程时，推送失败，提示：POST Git-receive-pack (chunked)。 原因：网上查找到一个比较靠谱的说法：This is a bug in git, when using https it will use chunked encoding for uploads above a certain size. those">
+<meta name="twitter:title" content="pod 引入ReactiveCocoa 注意的点">
+<meta name="twitter:description" content="项目导入ReactiveCocoa时才发现其实它是分OC &amp;amp; Swift版本的。其中ReactiveCocoa适用于swift项目，ReactiveObjC适用于纯OC项目。记录下避免以后踩坑。  编辑podfile文件： 123456789101112platform :ios, &amp;apos;8.0&amp;apos;inhibit_all_warnings!// pod引入时需要添加这个，不引">
   
     <link rel="alternative" href="/atom.xml" title="侯晓丹的个人空间" type="application/atom+xml">
   
@@ -138,39 +137,33 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-sourcetree-推送问题" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-pod-引入ReactiveCocoa-注意的点" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      sourcetree 推送问题
+      pod 引入ReactiveCocoa 注意的点
     </h1>
   
 
         
-        <a href="/2017/11/09/sourcetree-推送问题/" class="archive-article-date">
-  	<time datetime="2017-11-09T02:51:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-09</time>
+        <a href="/2017/12/29/pod-引入ReactiveCocoa-注意的点/" class="archive-article-date">
+  	<time datetime="2017-12-29T07:03:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-29</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <a id="more"></a>
+        <p>项目导入ReactiveCocoa时才发现其实它是分OC &amp; Swift版本的。其中ReactiveCocoa适用于swift项目，ReactiveObjC适用于纯OC项目。记录下避免以后踩坑。</p>
 <ul>
-<li>背景：私有库里接入了腾讯云短视频SDK，搞完配置要推送到远程时，推送失败，提示：POST Git-receive-pack (chunked)。</li>
-<li><p>原因：网上查找到一个比较靠谱的说法：This is a bug in git, when using https it will use chunked encoding for uploads above a certain size. those do not work.<br>A trivial fix is to tell git to not chunk until some ridiculously large size value, such as: <strong>git config http.postBuffer 524288000</strong></p>
+<li><p>编辑podfile文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">platform :ios, &apos;8.0&apos;</div><div class="line">inhibit_all_warnings!</div><div class="line"></div><div class="line">// pod引入时需要添加这个，不引入pod会报错。</div><div class="line">use_frameworks!</div><div class="line"></div><div class="line">// Test: 工程名</div><div class="line">target &apos;Test&apos; do</div><div class="line"></div><div class="line">pod &apos;ReactiveObjC&apos;</div><div class="line"></div><div class="line">end</div></pre></td></tr></table></figure>
 </li>
-<li><p>解决方法：1.  命令行配置：git config http.postBuffer 524288000<br>2.打开sourcetree -&gt; 设置（右上角） -&gt; 高级 -&gt; 编辑配置文件<br>在文件最后添加<br>[http] </p>
-<pre><code>postBuffer = 524288000
-</code></pre><p>点击确定，重新推送。</p>
+<li><p>执行 pod install即可。</p>
 </li>
-<li><p>后续问题，sourcetree 推送之后：提示：POST git-receive-pack (239851501 bytes) …</p>
-</li>
-<li>解决：转成命令推送 git push origin master<br>命令卡在：<strong>total 41(delta 8), reused 0(delta 0)</strong></li>
-<li>把原来修改的配置文件删掉。推送成功。</li>
 </ul>
 
       
@@ -201,17 +194,6 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">sourcetree git push</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
 
       
@@ -262,7 +244,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http:noblewoman.github.io/2017/11/09/sourcetree-推送问题/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http:noblewoman.github.io/2017/12/29/pod-引入ReactiveCocoa-注意的点/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -276,18 +258,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/11/22/mac-设置启动项/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          mac 设置启动项
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/11/08/创建一个私有库/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">创建一个私有库</div>
+    <a href="/2017/12/26/动态改变tabbar上的icon-title/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">动态改变tabbar上的icon &amp; title</div>
       <i class="icon-circle-right"></i>
     </a>
   

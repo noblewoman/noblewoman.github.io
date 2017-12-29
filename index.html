@@ -135,6 +135,76 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-pod-引入ReactiveCocoa-注意的点" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/29/pod-引入ReactiveCocoa-注意的点/">pod 引入ReactiveCocoa 注意的点</a>
+    </h1>
+  
+
+        
+        <a href="/2017/12/29/pod-引入ReactiveCocoa-注意的点/" class="archive-article-date">
+  	<time datetime="2017-12-29T07:03:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>项目导入ReactiveCocoa时才发现其实它是分OC &amp; Swift版本的。其中ReactiveCocoa适用于swift项目，ReactiveObjC适用于纯OC项目。记录下避免以后踩坑。</p>
+<ul>
+<li><p>编辑podfile文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">platform :ios, &apos;8.0&apos;</div><div class="line">inhibit_all_warnings!</div><div class="line"></div><div class="line">// pod引入时需要添加这个，不引入pod会报错。</div><div class="line">use_frameworks!</div><div class="line"></div><div class="line">// Test: 工程名</div><div class="line">target &apos;Test&apos; do</div><div class="line"></div><div class="line">pod &apos;ReactiveObjC&apos;</div><div class="line"></div><div class="line">end</div></pre></td></tr></table></figure>
+</li>
+<li><p>执行 pod install即可。</p>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/12/29/pod-引入ReactiveCocoa-注意的点/">阅读全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-动态改变tabbar上的icon-title" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -829,15 +899,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">MD5 NSString NSData</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">status setting</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">sourcetree git push</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">MD5 NSString NSData</a>
               </li>
             
             <div class="clearfix"></div>
