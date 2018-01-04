@@ -14,7 +14,7 @@
 <meta property="og:url" content="noblewoman.github.io/2017/12/01/问题记录/index.html">
 <meta property="og:site_name" content="侯晓丹的个人空间">
 <meta property="og:description" content="xcode编译报错之：property with ‘retain(or strong)’ attribute must be of object type 编译报错行 @property (nonatomic, strong) dispatch_queue_t  ioQueue; 原因：引入的SDK低于6.0时， dispatch_queue_t ARC没有托管。出现错误 修复：将原来的声明改为：">
-<meta property="og:updated_time" content="2017-12-15T03:04:33.000Z">
+<meta property="og:updated_time" content="2018-01-04T09:25:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="问题记录">
 <meta name="twitter:description" content="xcode编译报错之：property with ‘retain(or strong)’ attribute must be of object type 编译报错行 @property (nonatomic, strong) dispatch_queue_t  ioQueue; 原因：引入的SDK低于6.0时， dispatch_queue_t ARC没有托管。出现错误 修复：将原来的声明改为：">
@@ -179,6 +179,11 @@
 </ul>
 <h4 id="如何校验是否已经成功引入了gif图？"><a href="#如何校验是否已经成功引入了gif图？" class="headerlink" title="如何校验是否已经成功引入了gif图？"></a>如何校验是否已经成功引入了gif图？</h4><ul>
 <li>找到pods-&gt;Targets Support Files -&gt;Pods-Demo -&gt;Pods-Demo-resources.sh 文件，搜索是否有刚才引入的gif图即可验证。</li>
+</ul>
+<h4 id="Could-not-find-a-storyboard-named-‘Main’-in-bundle-NSBundle"><a href="#Could-not-find-a-storyboard-named-‘Main’-in-bundle-NSBundle" class="headerlink" title="Could not find a storyboard named ‘Main’ in bundle NSBundle"></a>Could not find a storyboard named ‘Main’ in bundle NSBundle</h4><ul>
+<li>删掉项目中的 storyboard 文件 &amp; plist文件中的 Main storyboard file base name。</li>
+<li>删除之后，Appdelegate中 初始化window。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];</div><div class="line">self.window.backgroundColor = [UIColor whiteColor];</div><div class="line">[self.window makeKeyAndVisible];</div></pre></td></tr></table></figure>
+</li>
 </ul>
 
       
