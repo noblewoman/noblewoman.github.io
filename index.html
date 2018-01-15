@@ -6,16 +6,16 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="noblewoman.github.io">
-  <title>侯晓丹的个人空间</title>
+  <title>noblewoman的个人空间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
-<meta property="og:title" content="侯晓丹的个人空间">
+<meta property="og:title" content="noblewoman的个人空间">
 <meta property="og:url" content="noblewoman.github.io/index.html">
-<meta property="og:site_name" content="侯晓丹的个人空间">
+<meta property="og:site_name" content="noblewoman的个人空间">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="侯晓丹的个人空间">
+<meta name="twitter:title" content="noblewoman的个人空间">
   
-    <link rel="alternative" href="/atom.xml" title="侯晓丹的个人空间" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="noblewoman的个人空间" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -42,10 +42,10 @@
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			<img src="" class="js-avatar">
+			<img src="/uploads/avatar.jpg" class="js-avatar">
 		</a>
 		<hgroup>
-		  <h1 class="header-author"><a href="/">houxiaodan</a></h1>
+		  <h1 class="header-author"><a href="/">noblewoman</a></h1>
 		</hgroup>
 		
 
@@ -90,10 +90,10 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img src="" class="js-avatar">
+				<img src="/uploads/avatar.jpg" class="js-avatar">
 			</div>
 			<hgroup>
-			  <h1 class="header-author js-header-author">houxiaodan</h1>
+			  <h1 class="header-author js-header-author">noblewoman</h1>
 			</hgroup>
 			
 			
@@ -134,6 +134,168 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-Masonry使用注意事项" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/15/Masonry使用注意事项/">Masonry使用注意事项</a>
+    </h1>
+  
+
+        
+        <a href="/2018/01/15/Masonry使用注意事项/" class="archive-article-date">
+  	<time datetime="2018-01-15T03:53:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="需要注意的点"><a href="#需要注意的点" class="headerlink" title="需要注意的点"></a>需要注意的点</h5><ul>
+<li>约束视图对象必须要在被addSubview：之后，才能给该对象添加约束。不然会crash。</li>
+<li>不能实现水平方向上排列两个不固定宽度的view。 其中一个view必须固定宽度或者设置最大宽度。</li>
+<li>leading, trailing 的使用，尽量用left &amp; right代替。在一些情况下leading, trailing布局是从右往左开始布局，可能会踩坑。</li>
+<li>建议是对于固定view，尽量给出一个固定的size，避免其它view相对它布局时出现约束冲突。出现约束冲突时，系统会默认选择一个约束进行布局。<h5 id="基础使用"><a href="#基础使用" class="headerlink" title="基础使用"></a>基础使用</h5></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mas_makeConstraints:添加约束</div><div class="line">mas_updateConstraints:更新约束</div><div class="line">mas_remakeConstraints:清除约束，重新添加</div></pre></td></tr></table></figure>
+<ul>
+<li><p>更新约束时可以直接调用mas_updateConstraints ；或者使用下面的方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">+ (BOOL)requiresConstraintBasedLayout&#123;</div><div class="line">    return YES;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 把需要更新的约束重写到这个方法内</div><div class="line">- (void)updateConstraints&#123;</div><div class="line">    [self mas_updateConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line"></div><div class="line">    &#125;];</div><div class="line">    [super updateConstraints];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>对某个view修改一些约束，希望立即生效。需要添加以下代码</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// 需要更新约束</div><div class="line">[self.nameLabel setNeedsUpdateConstraints];</div><div class="line">// 立即生效</div><div class="line">[self.nameLabel updateConstraintsIfNeeded];</div></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[self.nameLabel setNeedsLayout];</div><div class="line">[self.nameLabel layoutIfNeeded];</div></pre></td></tr></table></figure>
+<ul>
+<li>调整约束优先级:设置优先级后，masonry会优先实现优先级高的约束，发生冲突时，放弃优先级低的设定。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">    make.top.equalTo(self).offset(10);</div><div class="line">    make.left.equalTo(self.nameTitleLabel.mas_right).offset(12).priorityHigh();</div><div class="line">&#125;];</div></pre></td></tr></table></figure>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Masonry ， ios</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/01/15/Masonry使用注意事项/">阅读全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-NSMutableAttributedString-基础使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/12/NSMutableAttributedString-基础使用/">NSMutableAttributedString 基础使用</a>
+    </h1>
+  
+
+        
+        <a href="/2018/01/12/NSMutableAttributedString-基础使用/" class="archive-article-date">
+  	<time datetime="2018-01-12T07:02:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>记录一下NSMutableAttributedString常规使用。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">NSString *string = @&quot;桃之夭夭，灼灼其华。\n之子于归，宜其室家。\n桃之夭夭，有蕡其实。\n之子于归，宜其家室。\n桃之夭夭，其叶蓁蓁。\n之子于归，宜其家人。&quot;;</div><div class="line">NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];</div><div class="line">// 第一种方式:</div><div class="line"></div><div class="line">// 设置字体</div><div class="line">[attributedString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20] range:NSMakeRange(0, 5)];</div><div class="line">// 设置文字颜色</div><div class="line">[attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(17, 5)];</div><div class="line">// 设置文字背景颜色</div><div class="line">[attributedString addAttribute:NSBackgroundColorAttributeName value:[UIColor yellowColor] range:NSMakeRange(17, 5)];</div><div class="line">// 添加下划线 (==下划线是针对文本设置的，暂时没有将文本和下划线分开效果的实现==)；</div><div class="line">[attributedString addAttribute:NSUnderlineStyleAttributeName value:@(NSUnderlineStyleSingle) range:NSMakeRange(0, 5)];</div><div class="line"></div><div class="line">// 设置基准线 value: 正值上偏，负值下偏； 默认值0 不偏移。</div><div class="line">[attributedString addAttribute:NSBaselineOffsetAttributeName value:@(0) range:NSMakeRange(17, 5)];</div><div class="line">// 设置字符间距 value：正值间距变宽， 负值间距变窄。</div><div class="line">[attributedString addAttribute:NSKernAttributeName value:@(4) range:NSMakeRange(0, string.length)];</div><div class="line"></div><div class="line">// 设置删除线 NSUnderlineStyleSingle: 单线  NSUnderlinePatternDot：虚线</div><div class="line">[attributedString addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlineStyleSingle | NSUnderlinePatternDot) range:NSMakeRange(10, 15)];</div><div class="line">[attributedString addAttribute:NSStrikethroughColorAttributeName value:[UIColor lightGrayColor] range:NSMakeRange(10, 15)];</div><div class="line"></div><div class="line">// NSExpansionAttributeName : 设置字体横向拉伸</div><div class="line">[attributedString addAttribute:NSExpansionAttributeName value:@(0.5) range:NSMakeRange(0, string.length)];</div><div class="line"></div><div class="line">// 段落样式</div><div class="line">NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];</div><div class="line">// 行间距</div><div class="line">paragraphStyle.lineSpacing = 10;</div><div class="line">// 段落后间距</div><div class="line">paragraphStyle.paragraphSpacing = 20;</div><div class="line"></div><div class="line">// 设置段落前的间距</div><div class="line">paragraphStyle.paragraphSpacingBefore = 20;</div><div class="line"></div><div class="line">// 指定段落首行缩进</div><div class="line">paragraphStyle.firstLineHeadIndent = 20;</div><div class="line">// 指定非首行的缩进</div><div class="line">paragraphStyle.headIndent = 10;</div><div class="line">paragraphStyle.alignment = NSTextAlignmentLeft;</div><div class="line">[attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, string.length)];</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 第二种方式:</div><div class="line">NSDictionary *dic = @&#123;NSFontAttributeName: [UIFont systemFontOfSize:15],</div><div class="line">NSForegroundColorAttributeName: [UIColor redColor],</div><div class="line">&#125;;</div><div class="line">[attributedString addAttributes:dic range:NSMakeRange(0, string.length)];</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// 赋值。 赋值的对象包括UILabel、UITextview、UITextField</div><div class="line">UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(50,100, 200, 0)];</div><div class="line">[self.view addSubview:label];</div><div class="line">label.numberOfLines = 0;</div><div class="line">label.attributedText = attributedString;</div><div class="line">[label sizeToFit];</div></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/01/12/NSMutableAttributedString-基础使用/">阅读全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-3DTouch-基础使用-模拟器模拟问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -814,155 +976,10 @@
 
 
   
-    <article id="post-sourcetree-推送问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/09/sourcetree-推送问题/">sourcetree 推送问题</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/09/sourcetree-推送问题/" class="archive-article-date">
-  	<time datetime="2017-11-09T02:51:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <a id="more"></a>
-<ul>
-<li>背景：私有库里接入了腾讯云短视频SDK，搞完配置要推送到远程时，推送失败，提示：POST Git-receive-pack (chunked)。</li>
-<li><p>原因：网上查找到一个比较靠谱的说法：This is a bug in git, when using https it will use chunked encoding for uploads above a certain size. those do not work.<br>A trivial fix is to tell git to not chunk until some ridiculously large size value, such as: <strong>git config http.postBuffer 524288000</strong></p>
-</li>
-<li><p>解决方法：1.  命令行配置：git config http.postBuffer 524288000<br>2.打开sourcetree -&gt; 设置（右上角） -&gt; 高级 -&gt; 编辑配置文件<br>在文件最后添加<br>[http] </p>
-<pre><code>postBuffer = 524288000
-</code></pre><p>点击确定，重新推送。</p>
-</li>
-<li><p>后续问题，sourcetree 推送之后：提示：POST git-receive-pack (239851501 bytes) …</p>
-</li>
-<li>解决：转成命令推送 git push origin master<br>命令卡在：<strong>total 41(delta 8), reused 0(delta 0)</strong></li>
-<li>把原来修改的配置文件删掉。推送成功。</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">sourcetree git push</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/09/sourcetree-推送问题/">阅读全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-创建一个私有库" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/08/创建一个私有库/">创建一个私有库</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/08/创建一个私有库/" class="archive-article-date">
-  	<time datetime="2017-11-08T03:45:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/08/创建一个私有库/">阅读全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 
 
@@ -973,7 +990,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2018 houxiaodan
+    		&copy; 2018 noblewoman
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -1057,6 +1074,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">sourcetree git push</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Masonry ， ios</a>
               </li>
             
             <div class="clearfix"></div>
