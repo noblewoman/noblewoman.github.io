@@ -6,19 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="noblewoman.github.io">
-  <title>ios中使用MD5进行加密 | noblewoman的个人空间</title>
+  <title>app反编译&amp;ios代码混淆 | noblewoman的个人空间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="做视频缓存时需要对缓存路径进行加密，用到了MD5加密，就查了相关的资料，现记录一下。  首先需要引入头文件1#import &amp;lt;CommonCrypto/CommonDigest.h&amp;gt;    对NSString 进行加密两种方式：12345678910- (NSString *)md5:(NSString *)inputString&amp;#123;    const char *cStrin">
-<meta name="keywords" content="MD5 NSString NSData">
+  <meta name="description" content="推荐阅读kuailejim的文章链接。这里简单记录一下个人使用中遇到的问题和想法 。   反编译工具：class-dump 和 Hopper Disassembler   推荐使用后者，安装之后只需要将程序的二进制文件拖进去即可。拖进去之后默认显示源码是汇编语言，点击右上角的if(b)f(x),可以从伪代码中看出我们需要的信息。 class-dump 下载地址 使用中遇到下面的问题？  12➜">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ios中使用MD5进行加密">
-<meta property="og:url" content="noblewoman.github.io/2017/11/28/ios中使用MD5进行加密/index.html">
+<meta property="og:title" content="app反编译&amp;ios代码混淆">
+<meta property="og:url" content="noblewoman.github.io/2018/01/17/app反编译-ios代码混淆/index.html">
 <meta property="og:site_name" content="noblewoman的个人空间">
-<meta property="og:description" content="做视频缓存时需要对缓存路径进行加密，用到了MD5加密，就查了相关的资料，现记录一下。  首先需要引入头文件1#import &amp;lt;CommonCrypto/CommonDigest.h&amp;gt;    对NSString 进行加密两种方式：12345678910- (NSString *)md5:(NSString *)inputString&amp;#123;    const char *cStrin">
-<meta property="og:updated_time" content="2017-11-28T02:41:02.000Z">
+<meta property="og:description" content="推荐阅读kuailejim的文章链接。这里简单记录一下个人使用中遇到的问题和想法 。   反编译工具：class-dump 和 Hopper Disassembler   推荐使用后者，安装之后只需要将程序的二进制文件拖进去即可。拖进去之后默认显示源码是汇编语言，点击右上角的if(b)f(x),可以从伪代码中看出我们需要的信息。 class-dump 下载地址 使用中遇到下面的问题？  12➜">
+<meta property="og:updated_time" content="2018-01-17T09:24:25.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ios中使用MD5进行加密">
-<meta name="twitter:description" content="做视频缓存时需要对缓存路径进行加密，用到了MD5加密，就查了相关的资料，现记录一下。  首先需要引入头文件1#import &amp;lt;CommonCrypto/CommonDigest.h&amp;gt;    对NSString 进行加密两种方式：12345678910- (NSString *)md5:(NSString *)inputString&amp;#123;    const char *cStrin">
+<meta name="twitter:title" content="app反编译&amp;ios代码混淆">
+<meta name="twitter:description" content="推荐阅读kuailejim的文章链接。这里简单记录一下个人使用中遇到的问题和想法 。   反编译工具：class-dump 和 Hopper Disassembler   推荐使用后者，安装之后只需要将程序的二进制文件拖进去即可。拖进去之后默认显示源码是汇编语言，点击右上角的if(b)f(x),可以从伪代码中看出我们需要的信息。 class-dump 下载地址 使用中遇到下面的问题？  12➜">
   
     <link rel="alternative" href="/atom.xml" title="noblewoman的个人空间" type="application/atom+xml">
   
@@ -138,38 +137,86 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-ios中使用MD5进行加密" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-app反编译-ios代码混淆" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      ios中使用MD5进行加密
+      app反编译&amp;ios代码混淆
     </h1>
   
 
         
-        <a href="/2017/11/28/ios中使用MD5进行加密/" class="archive-article-date">
-  	<time datetime="2017-11-28T02:06:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-28</time>
+        <a href="/2018/01/17/app反编译-ios代码混淆/" class="archive-article-date">
+  	<time datetime="2018-01-17T08:17:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-17</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>做视频缓存时需要对缓存路径进行加密，用到了MD5加密，就查了相关的资料，现记录一下。</p>
-<ul>
-<li>首先需要引入头文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#import &lt;CommonCrypto/CommonDigest.h&gt;</div></pre></td></tr></table></figure>
-</li>
+        <ul>
+<li>推荐阅读<a href="https://www.jianshu.com/p/10873c5c1e08" target="_blank" rel="external">kuailejim的文章链接</a>。这里简单记录一下个人使用中遇到的问题和想法 。</li>
 </ul>
 <ol>
-<li>对NSString 进行加密两种方式：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">- (NSString *)md5:(NSString *)inputString&#123;</div><div class="line">    const char *cString = [inputString UTF8String];</div><div class="line">    unsigned char digest[CC_MD5_DIGEST_LENGTH];</div><div class="line">    CC_MD5(cString, (CC_LONG)strlen(cString), digest);</div><div class="line">    NSMutableString *outputString = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH *2];</div><div class="line">    for (int i = 0; i &lt; CC_MD5_DIGEST_LENGTH; i ++) &#123;</div><div class="line">        [outputString appendFormat:@&quot;%02x&quot;,digest[i]];</div><div class="line">    &#125;</div><div class="line">    return outputString;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
+<li>反编译工具：class-dump 和 Hopper Disassembler</li>
 </ol>
-<p>方法二：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">- (NSString *)md51:(NSString *)inputString1&#123;</div><div class="line">    const char *cString = [inputString1 UTF8String];</div><div class="line">    unsigned char r [CC_MD5_DIGEST_LENGTH];</div><div class="line">    CC_MD5(cString, (CC_LONG)strlen(cString), r);</div><div class="line">    return [NSString                stringWithFormat:@&quot;%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x&quot;,</div><div class="line">    r[0],r[1],r[2], r[3], r[4], r[5], r[6], r[7], r[8], r[9], r[10],</div><div class="line">    r[11], r[12], r[13], r[14], r[15]];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>对NSData进行加密<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">- (NSString *)md5:(NSData *)data&#123;</div><div class="line">    unsigned char r[CC_MD5_DIGEST_LENGTH];</div><div class="line">    CC_MD5(data.bytes,(CC_LONG)data.length, r);</div><div class="line">    return [NSString stringWithFormat:@&quot;%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x&quot;,</div><div class="line">    r[0], r[1], r[2], r[3], r[4], r[5], r[6], r[7], r[8], r[9], r[10],</div><div class="line">    r[11], r[12], r[13], r[14], r[15]];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-
+<ul>
+<li>推荐使用后者，安装之后只需要将程序的二进制文件拖进去即可。拖进去之后默认显示源码是汇编语言，点击右上角的if(b)f(x),可以从伪代码中看出我们需要的信息。</li>
+<li>class-dump <a href="http://stevenygard.com/download/class-dump-3.5.dmg" target="_blank" rel="external">下载地址</a></li>
+<li>使用中遇到下面的问题？</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">➜  ~ git:(master) ✗ touch class-dump /usr/bin</div><div class="line">touch: /usr/bin: Operation not permitted</div></pre></td></tr></table></figure>
+<p>原因是osx 10.11 限制了root用户权限。<br>如何解决：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">// 注：我的class-dump在桌面上</div><div class="line">// 在根目录创建一个bin目录</div><div class="line">➜  ~ git:(master) ✗ mv /Users/011/Desktop/class-dump ~/bin</div><div class="line">// 把class-dump 拷贝到该目录</div><div class="line">➜  ~ git:(master) ✗ chmod +x ~/bin/class-dump</div><div class="line">// 打开.bash_profile文件，在文件最后增加一行export PATH=$HOME/bin/:$PATH并保存。</div><div class="line">➜  ~ git:(master) ✗ open ~/.bash_profile</div><div class="line">// 执行下面命令</div><div class="line">➜  ~ git:(master) ✗ source ~/.bash_profile</div><div class="line">// 执行class-dump 命令 出现版本说明执行成功</div><div class="line">➜  ~ git:(master) ✗ class-dump</div><div class="line">class-dump 3.5 (64 bit)</div><div class="line">Usage: class-dump [options] &lt;mach-o-file&gt;</div></pre></td></tr></table></figure></p>
+<ul>
+<li><p>安装成功后直接执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 注: TestDemo 项目的二进制文件 （在xcode中选择target下的Products下的TestDemo.app-&gt;show in finder-&gt;右键显示包内容即可。）</div><div class="line">class-dump -H TestDemo</div></pre></td></tr></table></figure>
+</li>
+<li><p>想法：反编译app可以从伪代码中看到其app大致执行了什么代码，但对于代码量多的项目，反编译成本变得更大。没什么实际意义，如果需要参考一些好的想法，大可去GitHub寻找开源库即可，不用大费周章。但是对于核心的代码，还是有必要做好混淆工作，原因不必解释啦。。</p>
+<h5 id="下面介绍一下如何简单的对代码进行混淆。参考念茜的文章。"><a href="#下面介绍一下如何简单的对代码进行混淆。参考念茜的文章。" class="headerlink" title="下面介绍一下如何简单的对代码进行混淆。参考念茜的文章。"></a>下面介绍一下如何简单的对代码进行混淆。<a href="http://blog.csdn.net/yiyaaixuexi/article/details/29201699" target="_blank" rel="external">参考念茜的文章</a>。</h5></li>
+</ul>
+<ol>
+<li>代码混淆的思路：</li>
+</ol>
+<ul>
+<li>随意往程序中加入迷惑的代码指令。</li>
+<li>易读字符替换 （防止class-dump出可读信息的有效办法)。</li>
+</ul>
+<ol>
+<li>混淆的时机：</li>
+</ol>
+<ul>
+<li>在开发时一直保留清晰可读的程序代码，同时，希望编译出来的二进制包含乱七八糟的混淆后的程序代码。因此我们可以在Build Phrase中设定在编译之前进行方法名的字符串替换。</li>
+</ul>
+<ol>
+<li>混淆的方法：</li>
+</ol>
+<ul>
+<li>1个是#define， 一个是利用tops。</li>
+<li>利用#define的好处是：可以把混淆结果合并在一个.h中，在工程Prefix.pch里导入.h文件。</li>
+</ul>
+<ol>
+<li>混淆工具：</li>
+</ol>
+<ul>
+<li>新建一个func.list文件(保存想要混淆的字段名or方法名)</li>
+<li><p>新建 confuse.sh 文件(保存混淆脚本)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#!/usr/bin/env bash</div><div class="line"></div><div class="line">TABLENAME=symbols</div><div class="line">SYMBOL_DB_FILE=&quot;symbols&quot;</div><div class="line">STRING_SYMBOL_FILE=&quot;func.list&quot;</div><div class="line">HEAD_FILE=&quot;$PROJECT_DIR/$PROJECT_NAME/codeObfuscation.h&quot;</div><div class="line">export LC_CTYPE=C</div><div class="line"></div><div class="line">#维护数据库方便日后作排重</div><div class="line">createTable()</div><div class="line">&#123;</div><div class="line">echo &quot;create table $TABLENAME(src text, des text);&quot; | sqlite3 $SYMBOL_DB_FILE</div><div class="line">&#125;</div><div class="line"></div><div class="line">insertValue()</div><div class="line">&#123;</div><div class="line">echo &quot;insert into $TABLENAME values(&apos;$1&apos; ,&apos;$2&apos;);&quot; | sqlite3 $SYMBOL_DB_FILE</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">query()</div><div class="line">&#123;</div><div class="line">echo &quot;select * from $TABLENAME where src=&apos;$1&apos;;&quot; | sqlite3 $SYMBOL_DB_FILE</div><div class="line">&#125;</div><div class="line"></div><div class="line">ramdomString()</div><div class="line">&#123;</div><div class="line">openssl rand -base64 64 | tr -cd &apos;a-zA-Z&apos; |head -c 16</div><div class="line">&#125;</div><div class="line"></div><div class="line">rm -f $SYMBOL_DB_FILE</div><div class="line">rm -f $HEAD_FILE</div><div class="line">createTable</div><div class="line"></div><div class="line">touch $HEAD_FILE</div><div class="line">echo &apos;#ifndef Demo_codeObfuscation_h</div><div class="line">#define Demo_codeObfuscation_h&apos; &gt;&gt; $HEAD_FILE</div><div class="line">echo &quot;//confuse string at `date`&quot; &gt;&gt; $HEAD_FILE</div><div class="line">cat &quot;$STRING_SYMBOL_FILE&quot; | while read -ra line; do</div><div class="line">if [[ ! -z &quot;$line&quot; ]]; then</div><div class="line">ramdom=`ramdomString`</div><div class="line">echo $line $ramdom</div><div class="line">insertValue $line $ramdom</div><div class="line">echo &quot;#define $line $ramdom&quot; &gt;&gt; $HEAD_FILE</div><div class="line">fi</div><div class="line">done</div><div class="line">echo &quot;#endif&quot; &gt;&gt; $HEAD_FILE</div><div class="line"></div><div class="line"></div><div class="line">sqlite3 $SYMBOL_DB_FILE .dump</div></pre></td></tr></table></figure>
+</li>
+<li><p>将上述两个文件添加到工程中，编译工程会生成一个codeObfuscation.h类。</p>
+</li>
+<li><p>如果工程中存在Prefix.pch文件不需要创建，如果不存在新建一个。打开Prefix.pch文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">#ifndef PrefixHeader_pch</div><div class="line">#define PrefixHeader_pch</div><div class="line">// 导入</div><div class="line">#import &quot;codeObfuscation.h&quot;</div><div class="line"></div><div class="line">#endif /* PrefixHeader_pch */</div></pre></td></tr></table></figure>
+</li>
+<li><p>配置Build Phase（打开Build Phase-&gt;Run Script, 添加confuse.sh文件路径）</p>
+</li>
+<li>在func.list中，写入待混淆的函数名or字段名。 编译即可<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//  func.list中填写</div><div class="line">userName</div><div class="line"></div><div class="line">password</div><div class="line"></div><div class="line">setAttributing</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>编译后<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">// codeObfuscation.h中显示</div><div class="line">#ifndef Demo_codeObfuscation_h</div><div class="line">#define Demo_codeObfuscation_h</div><div class="line">#define userName YdjyenVxUFKQQcWz</div><div class="line">#define password sebamooXacxZOUUO</div><div class="line">#define setAttributing geIFNMwdNLIEUkFS</div><div class="line">#endif</div></pre></td></tr></table></figure></p>
+<h5 id="至此再使用class-dump-进行反编译可以看下效果。"><a href="#至此再使用class-dump-进行反编译可以看下效果。" class="headerlink" title="至此再使用class-dump 进行反编译可以看下效果。"></a>至此再使用class-dump 进行反编译可以看下效果。</h5>
       
 
       
@@ -198,17 +245,6 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">MD5 NSString NSData</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
 
       
@@ -259,7 +295,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http:noblewoman.github.io/2017/11/28/ios中使用MD5进行加密/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http:noblewoman.github.io/2018/01/17/app反编译-ios代码混淆/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -273,18 +309,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/12/01/问题记录/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          问题记录
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/11/23/ios-状态栏设置/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">ios 状态栏设置</div>
+    <a href="/2018/01/15/Masonry使用注意事项/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Masonry使用注意事项</div>
       <i class="icon-circle-right"></i>
     </a>
   
