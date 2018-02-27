@@ -6,18 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="noblewoman.github.io">
-  <title>问题记录 | noblewoman的个人空间</title>
+  <title>xcode 编译报错 | noblewoman的个人空间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="xcode编译报错之：property with ‘retain(or strong)’ attribute must be of object type 编译报错行 @property (nonatomic, strong) dispatch_queue_t  ioQueue; 原因：引入的SDK低于6.0时， dispatch_queue_t ARC没有托管。出现错误 修复：将原来的声明改为：">
+  <meta name="description" content="CocoaPods引入私有库，在主工程内提示找不到某私有库的头文件。 解决方案：选中工程名-&amp;gt;找到targets -&amp;gt;Build Settings中搜索user header search paths -&amp;gt; 添加pod文件路径${PROJECT_DIR}/Pods，后面选择recursive。重新编译。 补充：12$(SRCROOT) 代表项目的根目录$(PROJECT_DIR)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="问题记录">
+<meta property="og:title" content="xcode 编译报错">
 <meta property="og:url" content="noblewoman.github.io/2017/12/01/问题记录/index.html">
 <meta property="og:site_name" content="noblewoman的个人空间">
-<meta property="og:description" content="xcode编译报错之：property with ‘retain(or strong)’ attribute must be of object type 编译报错行 @property (nonatomic, strong) dispatch_queue_t  ioQueue; 原因：引入的SDK低于6.0时， dispatch_queue_t ARC没有托管。出现错误 修复：将原来的声明改为：">
-<meta property="og:updated_time" content="2018-01-04T09:26:28.000Z">
+<meta property="og:description" content="CocoaPods引入私有库，在主工程内提示找不到某私有库的头文件。 解决方案：选中工程名-&amp;gt;找到targets -&amp;gt;Build Settings中搜索user header search paths -&amp;gt; 添加pod文件路径${PROJECT_DIR}/Pods，后面选择recursive。重新编译。 补充：12$(SRCROOT) 代表项目的根目录$(PROJECT_DIR)">
+<meta property="og:updated_time" content="2018-02-27T09:02:47.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="问题记录">
-<meta name="twitter:description" content="xcode编译报错之：property with ‘retain(or strong)’ attribute must be of object type 编译报错行 @property (nonatomic, strong) dispatch_queue_t  ioQueue; 原因：引入的SDK低于6.0时， dispatch_queue_t ARC没有托管。出现错误 修复：将原来的声明改为：">
+<meta name="twitter:title" content="xcode 编译报错">
+<meta name="twitter:description" content="CocoaPods引入私有库，在主工程内提示找不到某私有库的头文件。 解决方案：选中工程名-&amp;gt;找到targets -&amp;gt;Build Settings中搜索user header search paths -&amp;gt; 添加pod文件路径${PROJECT_DIR}/Pods，后面选择recursive。重新编译。 补充：12$(SRCROOT) 代表项目的根目录$(PROJECT_DIR)">
   
     <link rel="alternative" href="/atom.xml" title="noblewoman的个人空间" type="application/atom+xml">
   
@@ -144,7 +144,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      问题记录
+      xcode 编译报错
     </h1>
   
 
@@ -157,7 +157,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="xcode编译报错之：property-with-‘retain-or-strong-’-attribute-must-be-of-object-type"><a href="#xcode编译报错之：property-with-‘retain-or-strong-’-attribute-must-be-of-object-type" class="headerlink" title="xcode编译报错之：property with ‘retain(or strong)’ attribute must be of object type"></a>xcode编译报错之：property with ‘retain(or strong)’ attribute must be of object type</h3><ul>
+        <h4 id="CocoaPods引入私有库，在主工程内提示找不到某私有库的头文件。"><a href="#CocoaPods引入私有库，在主工程内提示找不到某私有库的头文件。" class="headerlink" title="CocoaPods引入私有库，在主工程内提示找不到某私有库的头文件。"></a>CocoaPods引入私有库，在主工程内提示找不到某私有库的头文件。</h4><ul>
+<li>解决方案：选中工程名-&gt;找到targets -&gt;Build Settings中搜索user header search paths -&gt; 添加pod文件路径${PROJECT_DIR}/Pods，后面选择recursive。重新编译。</li>
+<li>补充：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$(SRCROOT) 代表项目的根目录</div><div class="line">$(PROJECT_DIR)代表当前项目 // $&#123;PROJECT_DIR&#125;/Pods 项目名/Pods路径下的文件</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="xcode编译报错之：property-with-‘retain-or-strong-’-attribute-must-be-of-object-type"><a href="#xcode编译报错之：property-with-‘retain-or-strong-’-attribute-must-be-of-object-type" class="headerlink" title="xcode编译报错之：property with ‘retain(or strong)’ attribute must be of object type"></a>xcode编译报错之：property with ‘retain(or strong)’ attribute must be of object type</h3><ul>
 <li>编译报错行 @property (nonatomic, strong) dispatch_queue_t  ioQueue;</li>
 <li>原因：引入的SDK低于6.0时， dispatch_queue_t ARC没有托管。出现错误</li>
 <li>修复：将原来的声明改为：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#if OS_OBJECT_USE_OBJC</div><div class="line">@property (nonatomic, strong) dispatch_queue_t          ioQueue;</div><div class="line">#else</div><div class="line">@property (nonatomic, assign) dispatch_queue_t          ioQueue;</div><div class="line">#endif</div></pre></td></tr></table></figure>

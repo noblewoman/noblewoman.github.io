@@ -850,7 +850,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/01/问题记录/">问题记录</a>
+      <a class="article-title" href="/2017/12/01/问题记录/">xcode 编译报错</a>
     </h1>
   
 
@@ -863,7 +863,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="xcode编译报错之：property-with-‘retain-or-strong-’-attribute-must-be-of-object-type"><a href="#xcode编译报错之：property-with-‘retain-or-strong-’-attribute-must-be-of-object-type" class="headerlink" title="xcode编译报错之：property with ‘retain(or strong)’ attribute must be of object type"></a>xcode编译报错之：property with ‘retain(or strong)’ attribute must be of object type</h3><ul>
+        <h4 id="CocoaPods引入私有库，在主工程内提示找不到某私有库的头文件。"><a href="#CocoaPods引入私有库，在主工程内提示找不到某私有库的头文件。" class="headerlink" title="CocoaPods引入私有库，在主工程内提示找不到某私有库的头文件。"></a>CocoaPods引入私有库，在主工程内提示找不到某私有库的头文件。</h4><ul>
+<li>解决方案：选中工程名-&gt;找到targets -&gt;Build Settings中搜索user header search paths -&gt; 添加pod文件路径${PROJECT_DIR}/Pods，后面选择recursive。重新编译。</li>
+<li>补充：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$(SRCROOT) 代表项目的根目录</div><div class="line">$(PROJECT_DIR)代表当前项目 // $&#123;PROJECT_DIR&#125;/Pods 项目名/Pods路径下的文件</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="xcode编译报错之：property-with-‘retain-or-strong-’-attribute-must-be-of-object-type"><a href="#xcode编译报错之：property-with-‘retain-or-strong-’-attribute-must-be-of-object-type" class="headerlink" title="xcode编译报错之：property with ‘retain(or strong)’ attribute must be of object type"></a>xcode编译报错之：property with ‘retain(or strong)’ attribute must be of object type</h3><ul>
 <li>编译报错行 @property (nonatomic, strong) dispatch_queue_t  ioQueue;</li>
 <li>原因：引入的SDK低于6.0时， dispatch_queue_t ARC没有托管。出现错误</li>
 <li>修复：将原来的声明改为：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#if OS_OBJECT_USE_OBJC</div><div class="line">@property (nonatomic, strong) dispatch_queue_t          ioQueue;</div><div class="line">#else</div><div class="line">@property (nonatomic, assign) dispatch_queue_t          ioQueue;</div><div class="line">#endif</div></pre></td></tr></table></figure>
