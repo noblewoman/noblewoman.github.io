@@ -135,6 +135,78 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-statfs-获取磁盘容量相关" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/01/statfs-获取磁盘容量相关/">statfs 获取磁盘容量相关</a>
+    </h1>
+  
+
+        
+        <a href="/2017/12/01/statfs-获取磁盘容量相关/" class="archive-article-date">
+  	<time datetime="2017-12-01T03:05:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近在做缓存相关，这里简单记录一下statfs用法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">struct statfs &#123;</div><div class="line">short    f_otype;        /* TEMPORARY SHADOW COPY OF f_type */</div><div class="line">short    f_oflags;        /* TEMPORARY SHADOW COPY OF f_flags */</div><div class="line">long    f_bsize;        /* fundamental file system block size */</div><div class="line">long    f_iosize;        /* optimal transfer block size */</div><div class="line">long    f_blocks;        /* total data blocks in file system */</div><div class="line">long    f_bfree;        /* free blocks in fs */</div><div class="line">long    f_bavail;        /* free blocks avail to non-superuser */</div><div class="line">long    f_files;        /* total file nodes in file system */</div><div class="line">long    f_ffree;        /* free file nodes in fs */</div><div class="line">fsid_t    f_fsid;            /* file system id */</div><div class="line">uid_t    f_owner;        /* user that mounted the filesystem */</div><div class="line">short    f_reserved1;    /* spare for later */</div><div class="line">short    f_type;            /* type of filesystem */</div><div class="line">long    f_flags;        /* copy of mount exported flags */</div><div class="line">long    f_reserved2[2];    /* reserved for future use */</div><div class="line">char    f_fstypename[MFSNAMELEN]; /* fs type name */</div><div class="line">char    f_mntonname[MNAMELEN];    /* directory on which mounted */</div><div class="line">char    f_mntfromname[MNAMELEN];/* mounted filesystem */</div><div class="line">char    f_reserved3;    /* For alignment */</div><div class="line">long    f_reserved4[4];    /* For future use */</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<ul>
+<li>获取总磁盘容量：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">- (unsigned long long)getDiskTotalSize&#123;</div><div class="line">    struct statfs buf;</div><div class="line">    unsigned long long totalSpace = -1;</div><div class="line">    if (statfs(&quot;/var&quot;, &amp;buf) &gt;= 0) &#123;</div><div class="line">    // buf.f_bsize 经过优化后的传输块的大小； f_blocks: /* total data blocks in file system */</div><div class="line">    totalSpace = (long long)(buf.f_bsize * buf.f_blocks);</div><div class="line">    &#125;</div><div class="line">    return totalSpace;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>获取可用磁盘容量</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">- (unsigned long long)getDiskFreeSize&#123;</div><div class="line">    struct statfs buf;</div><div class="line">    unsigned long long freeSpace = -1;</div><div class="line">    if (statfs(&quot;/var&quot;, &amp;buf) &gt;= 0) &#123;</div><div class="line">    // buf.f_bsize 经过优化后的传输块的大小； f_bfree: /* free blocks in fs */</div><div class="line">    freeSpace = (long long)(buf.f_bsize * buf.f_bfree);</div><div class="line">    &#125;</div><div class="line">    return freeSpace;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/12/01/statfs-获取磁盘容量相关/">阅读全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-xcode 编译报错" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -722,6 +794,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">appcode</a>
+              </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Masonry ， ios</a>
