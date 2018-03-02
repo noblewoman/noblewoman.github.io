@@ -6,18 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="noblewoman.github.io">
-  <title>NSMutableAttributedString 基础使用 | noblewoman的个人空间</title>
+  <title>xcode编译报错之-safe area layout guide before ios 9.0 | noblewoman的个人空间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="记录一下NSMutableAttributedString常规使用。1234567891011121314151617181920212223242526272829303132333435363738394041NSString *string = @&amp;quot;桃之夭夭，灼灼其华。\n之子于归，宜其室家。\n桃之夭夭，有蕡其实。\n之子于归，宜其家室。\n桃之夭夭，其叶蓁蓁。\n之子于归，宜">
+  <meta name="description" content="xcode9之后运行会报safe area layout guide before ios 9.0这个错误。解决方案如下：">
+<meta name="keywords" content="xcode 编译报错">
 <meta property="og:type" content="article">
-<meta property="og:title" content="NSMutableAttributedString 基础使用">
-<meta property="og:url" content="noblewoman.github.io/2018/01/12/NSMutableAttributedString-基础使用/index.html">
+<meta property="og:title" content="xcode编译报错之-safe area layout guide before ios 9.0">
+<meta property="og:url" content="noblewoman.github.io/2018/03/02/xcode编译报错之-safe-area-layout-guide-before-ios-9-0/index.html">
 <meta property="og:site_name" content="noblewoman的个人空间">
-<meta property="og:description" content="记录一下NSMutableAttributedString常规使用。1234567891011121314151617181920212223242526272829303132333435363738394041NSString *string = @&amp;quot;桃之夭夭，灼灼其华。\n之子于归，宜其室家。\n桃之夭夭，有蕡其实。\n之子于归，宜其家室。\n桃之夭夭，其叶蓁蓁。\n之子于归，宜">
-<meta property="og:updated_time" content="2018-01-12T07:16:29.000Z">
+<meta property="og:description" content="xcode9之后运行会报safe area layout guide before ios 9.0这个错误。解决方案如下：">
+<meta property="og:image" content="https://si.geilicdn.com/hz_img_00c100000161e4a1cc5e0a02685e_717_468_unadjust.png">
+<meta property="og:updated_time" content="2018-03-02T03:00:08.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="NSMutableAttributedString 基础使用">
-<meta name="twitter:description" content="记录一下NSMutableAttributedString常规使用。1234567891011121314151617181920212223242526272829303132333435363738394041NSString *string = @&amp;quot;桃之夭夭，灼灼其华。\n之子于归，宜其室家。\n桃之夭夭，有蕡其实。\n之子于归，宜其家室。\n桃之夭夭，其叶蓁蓁。\n之子于归，宜">
+<meta name="twitter:title" content="xcode编译报错之-safe area layout guide before ios 9.0">
+<meta name="twitter:description" content="xcode9之后运行会报safe area layout guide before ios 9.0这个错误。解决方案如下：">
+<meta name="twitter:image" content="https://si.geilicdn.com/hz_img_00c100000161e4a1cc5e0a02685e_717_468_unadjust.png">
   
     <link rel="alternative" href="/atom.xml" title="noblewoman的个人空间" type="application/atom+xml">
   
@@ -137,32 +140,28 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-NSMutableAttributedString-基础使用" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-xcode编译报错之-safe-area-layout-guide-before-ios-9-0" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      NSMutableAttributedString 基础使用
+      xcode编译报错之-safe area layout guide before ios 9.0
     </h1>
   
 
         
-        <a href="/2018/01/12/NSMutableAttributedString-基础使用/" class="archive-article-date">
-  	<time datetime="2018-01-12T07:02:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-12</time>
+        <a href="/2018/03/02/xcode编译报错之-safe-area-layout-guide-before-ios-9-0/" class="archive-article-date">
+  	<time datetime="2018-03-02T02:57:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-02</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ul>
-<li>记录一下NSMutableAttributedString常规使用。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">NSString *string = @&quot;桃之夭夭，灼灼其华。\n之子于归，宜其室家。\n桃之夭夭，有蕡其实。\n之子于归，宜其家室。\n桃之夭夭，其叶蓁蓁。\n之子于归，宜其家人。&quot;;</div><div class="line">NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];</div><div class="line">// 第一种方式:</div><div class="line"></div><div class="line">// 设置字体</div><div class="line">[attributedString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20] range:NSMakeRange(0, 5)];</div><div class="line">// 设置文字颜色</div><div class="line">[attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(17, 5)];</div><div class="line">// 设置文字背景颜色</div><div class="line">[attributedString addAttribute:NSBackgroundColorAttributeName value:[UIColor yellowColor] range:NSMakeRange(17, 5)];</div><div class="line">// 添加下划线 (==下划线是针对文本设置的，暂时没有将文本和下划线分开效果的实现==)；</div><div class="line">[attributedString addAttribute:NSUnderlineStyleAttributeName value:@(NSUnderlineStyleSingle) range:NSMakeRange(0, 5)];</div><div class="line"></div><div class="line">// 设置基准线 value: 正值上偏，负值下偏； 默认值0 不偏移。</div><div class="line">[attributedString addAttribute:NSBaselineOffsetAttributeName value:@(0) range:NSMakeRange(17, 5)];</div><div class="line">// 设置字符间距 value：正值间距变宽， 负值间距变窄。</div><div class="line">[attributedString addAttribute:NSKernAttributeName value:@(4) range:NSMakeRange(0, string.length)];</div><div class="line"></div><div class="line">// 设置删除线 NSUnderlineStyleSingle: 单线  NSUnderlinePatternDot：虚线</div><div class="line">[attributedString addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlineStyleSingle | NSUnderlinePatternDot) range:NSMakeRange(10, 15)];</div><div class="line">[attributedString addAttribute:NSStrikethroughColorAttributeName value:[UIColor lightGrayColor] range:NSMakeRange(10, 15)];</div><div class="line"></div><div class="line">// NSExpansionAttributeName : 设置字体横向拉伸</div><div class="line">[attributedString addAttribute:NSExpansionAttributeName value:@(0.5) range:NSMakeRange(0, string.length)];</div><div class="line"></div><div class="line">// 段落样式</div><div class="line">NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];</div><div class="line">// 行间距</div><div class="line">paragraphStyle.lineSpacing = 10;</div><div class="line">// 段落后间距</div><div class="line">paragraphStyle.paragraphSpacing = 20;</div><div class="line"></div><div class="line">// 设置段落前的间距</div><div class="line">paragraphStyle.paragraphSpacingBefore = 20;</div><div class="line"></div><div class="line">// 指定段落首行缩进</div><div class="line">paragraphStyle.firstLineHeadIndent = 20;</div><div class="line">// 指定非首行的缩进</div><div class="line">paragraphStyle.headIndent = 10;</div><div class="line">paragraphStyle.alignment = NSTextAlignmentLeft;</div><div class="line">[attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, string.length)];</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 第二种方式:</div><div class="line">NSDictionary *dic = @&#123;NSFontAttributeName: [UIFont systemFontOfSize:15],</div><div class="line">NSForegroundColorAttributeName: [UIColor redColor],</div><div class="line">&#125;;</div><div class="line">[attributedString addAttributes:dic range:NSMakeRange(0, string.length)];</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// 赋值。 赋值的对象包括UILabel、UITextview、UITextField</div><div class="line">UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(50,100, 200, 0)];</div><div class="line">[self.view addSubview:label];</div><div class="line">label.numberOfLines = 0;</div><div class="line">label.attributedText = attributedString;</div><div class="line">[label sizeToFit];</div></pre></td></tr></table></figure>
+        <p>xcode9之后运行会报safe area layout guide before ios 9.0这个错误。解决方案如下：</p>
+<p><img src="https://si.geilicdn.com/hz_img_00c100000161e4a1cc5e0a02685e_717_468_unadjust.png" alt="截图"></p>
 
       
 
@@ -192,6 +191,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">xcode 编译报错</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -242,7 +252,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http:noblewoman.github.io/2018/01/12/NSMutableAttributedString-基础使用/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http:noblewoman.github.io/2018/03/02/xcode编译报错之-safe-area-layout-guide-before-ios-9-0/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -256,18 +266,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/01/15/Masonry使用注意事项/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Masonry使用注意事项
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/01/04/3DTouch-基础使用-模拟器模拟问题/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">3DTouch 基础使用 &amp; 模拟器模拟问题</div>
+    <a href="/2018/03/01/appcode-运行工程模拟器黑屏问题解决方案/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">appcode 运行工程模拟器黑屏问题解决方案</div>
       <i class="icon-circle-right"></i>
     </a>
   
