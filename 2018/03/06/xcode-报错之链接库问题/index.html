@@ -6,18 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="noblewoman.github.io">
-  <title>linux 命令总结 | noblewoman的个人空间</title>
+  <title>xcode 报错之链接库问题 | noblewoman的个人空间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="记录一下自己平时会用到的命令，持续更新中~ chmod命令：用来变更文件或目录的权限。例：123- chmod 755：1.文件所有者可读可写可执行：- 4+2+12.与文件所有者同属一个用户组的其他用户可读可执行 - 4+13.其它用户组可读可执行 -4+1   123456789- User(u)：文件或目录的拥有者；- Group(g)：文件或目录的所属群组；- Other(o)：除了文件或">
+  <meta name="description" content="linker command failed with exit code 1 (use -v to see invocation) 背景：在主工程内pod install 一个新的私有库（Pod） 分析可能原因：1.该Pod库里有一些类与主工程类名一致冲突。2.宏定义冲突。具体哪个类有冲突，看xcode运行日志。">
+<meta name="keywords" content="xcode 编译报错">
 <meta property="og:type" content="article">
-<meta property="og:title" content="linux 命令总结">
-<meta property="og:url" content="noblewoman.github.io/2018/01/19/linux-命令总结/index.html">
+<meta property="og:title" content="xcode 报错之链接库问题">
+<meta property="og:url" content="noblewoman.github.io/2018/03/06/xcode-报错之链接库问题/index.html">
 <meta property="og:site_name" content="noblewoman的个人空间">
-<meta property="og:description" content="记录一下自己平时会用到的命令，持续更新中~ chmod命令：用来变更文件或目录的权限。例：123- chmod 755：1.文件所有者可读可写可执行：- 4+2+12.与文件所有者同属一个用户组的其他用户可读可执行 - 4+13.其它用户组可读可执行 -4+1   123456789- User(u)：文件或目录的拥有者；- Group(g)：文件或目录的所属群组；- Other(o)：除了文件或">
-<meta property="og:updated_time" content="2018-01-19T08:15:24.000Z">
+<meta property="og:description" content="linker command failed with exit code 1 (use -v to see invocation) 背景：在主工程内pod install 一个新的私有库（Pod） 分析可能原因：1.该Pod库里有一些类与主工程类名一致冲突。2.宏定义冲突。具体哪个类有冲突，看xcode运行日志。">
+<meta property="og:updated_time" content="2018-03-06T02:22:24.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="linux 命令总结">
-<meta name="twitter:description" content="记录一下自己平时会用到的命令，持续更新中~ chmod命令：用来变更文件或目录的权限。例：123- chmod 755：1.文件所有者可读可写可执行：- 4+2+12.与文件所有者同属一个用户组的其他用户可读可执行 - 4+13.其它用户组可读可执行 -4+1   123456789- User(u)：文件或目录的拥有者；- Group(g)：文件或目录的所属群组；- Other(o)：除了文件或">
+<meta name="twitter:title" content="xcode 报错之链接库问题">
+<meta name="twitter:description" content="linker command failed with exit code 1 (use -v to see invocation) 背景：在主工程内pod install 一个新的私有库（Pod） 分析可能原因：1.该Pod库里有一些类与主工程类名一致冲突。2.宏定义冲突。具体哪个类有冲突，看xcode运行日志。">
   
     <link rel="alternative" href="/atom.xml" title="noblewoman的个人空间" type="application/atom+xml">
   
@@ -137,31 +138,31 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-linux-命令总结" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-xcode-报错之链接库问题" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      linux 命令总结
+      xcode 报错之链接库问题
     </h1>
   
 
         
-        <a href="/2018/01/19/linux-命令总结/" class="archive-article-date">
-  	<time datetime="2018-01-19T03:41:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-19</time>
+        <a href="/2018/03/06/xcode-报错之链接库问题/" class="archive-article-date">
+  	<time datetime="2018-03-06T02:21:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-06</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h5 id="记录一下自己平时会用到的命令，持续更新中"><a href="#记录一下自己平时会用到的命令，持续更新中" class="headerlink" title="记录一下自己平时会用到的命令，持续更新中~"></a>记录一下自己平时会用到的命令，持续更新中~</h5><ul>
-<li>chmod命令：用来变更文件或目录的权限。<br>例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- chmod 755：1.文件所有者可读可写可执行：- 4+2+1</div><div class="line">2.与文件所有者同属一个用户组的其他用户可读可执行 - 4+1</div><div class="line">3.其它用户组可读可执行 -4+1</div></pre></td></tr></table></figure>
-</li>
+        <ul>
+<li>linker command failed with exit code 1 (use -v to see invocation)</li>
+<li>背景：在主工程内pod install 一个新的私有库（Pod）</li>
+<li>分析可能原因：1.该Pod库里有一些类与主工程类名一致冲突。2.宏定义冲突。具体哪个类有冲突，看xcode运行日志。</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">- User(u)：文件或目录的拥有者；</div><div class="line">- Group(g)：文件或目录的所属群组；</div><div class="line">- Other(o)：除了文件或者目录拥有者或所属群组之外，其它用户皆属于这个范围。</div><div class="line">- All(a)：全部的用户，包含拥有者，所属群组以及其它用户。</div><div class="line">- r：读取权限，数字代号为“4”</div><div class="line">- w：写入权限，数字代号为“2”</div><div class="line">- x：执行或切换权限，数字代号为“1”</div><div class="line">- -：不具任何权限，数字代号为“0”</div><div class="line">- s：特殊功能说明：变更文件或者目录的权限。</div></pre></td></tr></table></figure>
 
       
 
@@ -191,6 +192,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">xcode 编译报错</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -241,7 +253,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http:noblewoman.github.io/2018/01/19/linux-命令总结/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http:noblewoman.github.io/2018/03/06/xcode-报错之链接库问题/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -255,18 +267,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/02/28/git or pod命令执行出错~/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          pod命令执行出错记录
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/01/17/app反编译-ios代码混淆/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">app反编译&amp;ios代码混淆</div>
+    <a href="/2018/03/06/xcode-编译问题之模拟器/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">xcode 编译问题之模拟器</div>
       <i class="icon-circle-right"></i>
     </a>
   

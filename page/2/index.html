@@ -135,6 +135,220 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-3DTouch-基础使用-模拟器模拟问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/04/3DTouch-基础使用-模拟器模拟问题/">3DTouch 基础使用 &amp; 模拟器模拟问题</a>
+    </h1>
+  
+
+        
+        <a href="/2018/01/04/3DTouch-基础使用-模拟器模拟问题/" class="archive-article-date">
+  	<time datetime="2018-01-04T08:16:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 今天看了项目中引入了3DTouch，现在来记录下它的基本使用&amp;用模拟器测试3DTouch效果（踩坑）</p>
+<p> 一定要注意这里模拟器一定是要ios9的才可以，之前使用的是ios11结果一直看不到效果，🤷‍♀️。</p>
+<ol>
+<li>基本使用</li>
+</ol>
+<ul>
+<li>plist文件写入： 直接在plist文件中添加下面的key &amp; value。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">&lt;key&gt;UIApplicationShortcutItems&lt;/key&gt;</div><div class="line">&lt;array&gt;</div><div class="line">    &lt;dict&gt;</div><div class="line">    &lt;key&gt;UIApplicationShortcutItemType&lt;/key&gt;</div><div class="line">    &lt;string&gt;wd_homePage&lt;/string&gt;</div><div class="line">    &lt;key&gt;UIApplicationShortcutItemTitle&lt;/key&gt;</div><div class="line">    &lt;string&gt;首页&lt;/string&gt;</div><div class="line">    &lt;key&gt;UIApplicationShortcutItemSubtitle&lt;/key&gt;</div><div class="line">    &lt;string&gt;微首页&lt;/string&gt;</div><div class="line">    &lt;key&gt;UIApplicationShortcutItemIconFile&lt;/key&gt;</div><div class="line">    &lt;string&gt;main.png&lt;/string&gt;</div><div class="line">    &lt;key&gt;UIApplicationShortcutItemUserInfo&lt;/key&gt;</div><div class="line">    &lt;dict&gt;</div><div class="line">    &lt;key&gt;url&lt;/key&gt;</div><div class="line">    &lt;string&gt;index&lt;/string&gt;</div><div class="line">    &lt;/dict&gt;</div><div class="line">    &lt;/dict&gt;</div><div class="line">    &lt;dict&gt;</div><div class="line">    &lt;key&gt;UIApplicationShortcutItemType&lt;/key&gt;</div><div class="line">    &lt;string&gt;wd_follow&lt;/string&gt;</div><div class="line">    &lt;key&gt;UIApplicationShortcutItemTitle&lt;/key&gt;</div><div class="line">    &lt;string&gt;关注&lt;/string&gt;</div><div class="line">    &lt;key&gt;UIApplicationShortcutItemSubtitle&lt;/key&gt;</div><div class="line">    &lt;string&gt;微关注&lt;/string&gt;</div><div class="line">    &lt;key&gt;UIApplicationShortcutItemIconFile&lt;/key&gt;</div><div class="line">    &lt;string&gt;fellow.png&lt;/string&gt;</div><div class="line">    &lt;key&gt;UIApplicationShortcutItemUserInfo&lt;/key&gt;</div><div class="line">    &lt;dict&gt;</div><div class="line">    &lt;key&gt;url&lt;/key&gt;</div><div class="line">    &lt;string&gt;guanzhu&lt;/string&gt;</div><div class="line">    &lt;/dict&gt;</div><div class="line">    &lt;/dict&gt;</div><div class="line">&lt;/array&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>以上key简单介绍如下：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>desc</th>
+<th>required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UIApplicationShortcutItemType</td>
+<td>事件唯一标示，可以判断具体点了哪个事件</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>UIApplicationShortcutItemTitle</td>
+<td>标题</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>UIApplicationShortcutItemSubtitle</td>
+<td>副标题</td>
+<td>N</td>
+</tr>
+<tr>
+<td>UIApplicationShortcutItemIconFile</td>
+<td>图标资源</td>
+<td>N</td>
+</tr>
+<tr>
+<td>UIApplicationShortcutItemUserInfo</td>
+<td>dic，保存一些key&amp;value</td>
+<td>N</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>代码添加 : 比较简单，直接上代码。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">// #define isIOS9 ([[UIDevice currentDevice].systemVersion floatValue] &gt;= 9.0)</div><div class="line">// 也可以使用IOS9 中提供的来检查设备是否支持3DTouch</div><div class="line">@property(nonatomic, readonly) UIForceTouchCapability forceTouchCapability;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">// 代码示例</div><div class="line">if (isIOS9) &#123;</div><div class="line">    UIApplicationShortcutIcon *searchIcon = [UIApplicationShortcutIcon iconWithTemplateImageName:@&quot;wd_3d_search&quot;];</div><div class="line">    // 创建 UIApplicationShortcutItem</div><div class="line">    UIApplicationShortcutItem *searchItem = [[UIApplicationShortcutItem alloc] initWithType:kSearchType localizedTitle:@&quot;搜索&quot; localizedSubtitle:nil icon:searchIcon userInfo:nil];</div><div class="line"></div><div class="line">    UIApplicationShortcutIcon *orderIcon = [UIApplicationShortcutIcon iconWithTemplateImageName:@&quot;wd_3d_deliver&quot;];</div><div class="line">    UIApplicationShortcutItem *orderItem = [[UIApplicationShortcutItem alloc] initWithType:kOrderType localizedTitle:@&quot;订单&quot; localizedSubtitle:nil icon:orderIcon userInfo:nil];</div><div class="line"></div><div class="line">    UIApplicationShortcutIcon *cartIcon = [UIApplicationShortcutIcon iconWithTemplateImageName:@&quot;wd_3d_cart&quot;];</div><div class="line">    UIApplicationShortcutItem *cartItem = [[UIApplicationShortcutItem alloc] initWithType:kCartType localizedTitle:@&quot;购物车&quot; localizedSubtitle:nil icon:cartIcon userInfo:nil];</div><div class="line">    // 将Items回传给 UIApplication</div><div class="line">    [UIApplication sharedApplication].shortcutItems = @[searchItem, orderItem, cartItem];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>点击回调</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL succeeded))completionHandler &#123;</div><div class="line">// 具体的点击处理</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li>模拟器上调试</li>
+</ol>
+<ul>
+<li>参考GitHub方案 <a href="https://github.com/DeskConnect/SBShortcutMenuSimulator" target="_blank" rel="external">地址</a> 上面有具体的使用方案，下面讲述一下踩到的坑。</li>
+<li><p>download &amp; make</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">git clone https://github.com/DeskConnect/SBShortcutMenuSimulator.git</div><div class="line">cd SBShortcutMenuSimulat</div><div class="line">make</div><div class="line">// 执行 make 时 出现make: Nothing to be done for &apos;all&apos;</div><div class="line">// 说明已经编译过了，你也 可以使用make clean， 然后在执行make</div></pre></td></tr></table></figure>
+</li>
+<li><p>开启模拟器， 在SBShortcutMenuSimulator 下执行下面的命令： 让SpringBoard 支持SBShortcutMenuSimulator</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">xcrun simctl spawn booted launchctl debug system/com.apple.SpringBoard --environment DYLD_INSERT_LIBRARIES=$PWD/SBShortcutMenuSimulator.dylib</div><div class="line">xcrun simctl spawn booted launchctl stop com.apple.SpringBoard</div><div class="line">// 出现 Service configured for next launch.说明配置成功了。</div></pre></td></tr></table></figure>
+<ul>
+<li><p>执行即可完成预览</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">echo &apos;com.apple.mobilecal&apos; | nc 127.0.0.1 8000</div><div class="line">// com.apple.mobilecal 替换成你项目的bundle id即可。</div></pre></td></tr></table></figure>
+</li>
+<li><p>没安装 nc 的同学 看下面：</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">在terminal 中执行以下命令：</div><div class="line"></div><div class="line">// 先安装 wget</div><div class="line">homebrew install wget</div><div class="line">// 下载nc</div><div class="line">wget http://sourceforge.net/projects/netcat/files/netcat/0.7.1/netcat-0.7.1.tar.gz/download -O netcat-0.7.1.tar.gz</div><div class="line">// 解压</div><div class="line">tar zxvf netcat-0.7.1.tar.gz</div><div class="line">// 编译前配置</div><div class="line">cd netcat-0.7.1</div><div class="line"></div><div class="line">./configure</div><div class="line">// 编译</div><div class="line">make</div></pre></td></tr></table></figure>
+<p>参考资料：</p>
+<ul>
+<li>《浅谈3D Touch（1） – Home screen quick action》</li>
+<li>nc 安装参考 <a href="http://jeary.org/post-36.html" target="_blank" rel="external">Jeary’s Blog</a></li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/01/04/3DTouch-基础使用-模拟器模拟问题/">阅读全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-pod-引入ReactiveCocoa-注意的点" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/29/pod-引入ReactiveCocoa-注意的点/">pod 引入ReactiveCocoa 注意的点</a>
+    </h1>
+  
+
+        
+        <a href="/2017/12/29/pod-引入ReactiveCocoa-注意的点/" class="archive-article-date">
+  	<time datetime="2017-12-29T07:03:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>项目导入ReactiveCocoa时才发现其实它是分OC &amp; Swift版本的。其中ReactiveCocoa适用于swift项目，ReactiveObjC适用于纯OC项目。记录下避免以后踩坑。</p>
+<ul>
+<li><p>编辑podfile文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">platform :ios, &apos;8.0&apos;</div><div class="line">inhibit_all_warnings!</div><div class="line"></div><div class="line">// pod引入时需要添加这个，不引入pod会报错。</div><div class="line">use_frameworks!</div><div class="line"></div><div class="line">// Test: 工程名</div><div class="line">target &apos;Test&apos; do</div><div class="line"></div><div class="line">pod &apos;ReactiveObjC&apos;</div><div class="line"></div><div class="line">end</div></pre></td></tr></table></figure>
+</li>
+<li><p>执行 pod install即可。</p>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/12/29/pod-引入ReactiveCocoa-注意的点/">阅读全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-动态改变tabbar上的icon-title" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -891,19 +1105,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">sourcetree git push</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">status setting</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">xcode 编译报错</a>
+                <a href="javascript:void(0)" class="js-tag color5">sourcetree git push</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">xcode编译报错</a>
+                <a href="javascript:void(0)" class="js-tag color1">xcode 编译报错</a>
               </li>
              
               <li class="article-tag-list-item">
