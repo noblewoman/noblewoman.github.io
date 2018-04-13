@@ -6,11 +6,11 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="noblewoman.github.io">
-  <title>Archives: 2018/2 | noblewoman的个人空间</title>
+  <title>noblewoman的个人空间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
 <meta property="og:title" content="noblewoman的个人空间">
-<meta property="og:url" content="noblewoman.github.io/archives/2018/02/index.html">
+<meta property="og:url" content="noblewoman.github.io/page/3/index.html">
 <meta property="og:site_name" content="noblewoman的个人空间">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="noblewoman的个人空间">
@@ -135,47 +135,98 @@
           <div id="js-content" class="content-ll">
             
   
-  
+    <article id="post-创建一个私有库" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/02/28/git or pod命令执行出错~/" class="archive-article-date">
-  	<time datetime="2018-02-28T01:59:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-28</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
     <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/02/28/git or pod命令执行出错~/">pod命令执行出错记录</a>
+      <a class="article-title" href="/2017/11/08/创建一个私有库/">创建一个私有库</a>
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
+        
+        <a href="/2017/11/08/创建一个私有库/" class="archive-article-date">
+  	<time datetime="2017-11-08T03:45:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>创建一个私有库</strong></p>
+<ul>
+<li>在桌面上生成一个PodDemo库，方式一：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">1. cd Desktop</div><div class="line">2. pod lib create PodDemo // 生成的工程项目在Example文件路径下</div><div class="line">3. What language do you want to use?? [ Swift / ObjC ] -&gt;ObjC(按需选择)</div><div class="line">4. Would you like to include a demo application with your library? [ Yes / No ]  -&gt;Yes 是否需要创建一个demo</div><div class="line">5. Which testing frameworks will you use? [ Specta / Kiwi / None ]</div><div class="line">6. Would you like to do view based testing? [ Yes / No ]</div><div class="line">7. What is your class prefix? -&gt;输入你想要的demo类的前缀</div><div class="line">8. Running pod install on your new library.</div><div class="line">此时我们就在本地建好了一个podDemo。</div></pre></td></tr></table></figure>
+<p>方式二：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">1. cd Desktop</div><div class="line">2. mkdir PodDemo // 新建一个PodDemo文件夹</div><div class="line">3. cd PodDemo  echo &quot;readMe&quot; &gt; readMe.txt //添加readMe文件</div><div class="line">4. git init // 在当前目录下创建一个新的本地仓库。</div><div class="line">5. git add . // 暂存当前目录下的所有文件</div><div class="line">6. git commit -m &apos;commit record&apos; // 提交</div><div class="line"></div><div class="line">这种方式创建的库需要建立新的项目，并创建Podfile &amp; Podspec文件使用pod管理。</div></pre></td></tr></table></figure></p>
+<ul>
+<li>接下来要做的事情：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">1. 修改podspec文件。（主要：s.homepage s.source 库对应的远程地址、 s.dependency 依赖库、s.source_files类文件、s.resource图片资源）</div><div class="line">2. 将本地库和远程库建立联系。</div><div class="line">- 执行 git remote add origin 地址（远程地址）建立联系</div><div class="line">- git remote -v 查看本地仓库是否和远程仓库建立好联系。</div><div class="line">3.将本地仓库代码推送到远程 git push -u origin master（git push -u origin master -f 强制推送，如果本地master分支和远程master分支出现代码冲突可以采用强制推送）</div></pre></td></tr></table></figure>
+<ul>
+<li>补充git经常用的一些命令：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">1.git checkout -b develop 建立develop分支</div><div class="line">2.git branch 当前库本地分支</div><div class="line">3.git branch -a 当前库的所有分支，包括远程分支</div><div class="line">4.git checkout develop 切换分支到develop</div><div class="line">5.git pull 拉取远程</div></pre></td></tr></table></figure>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">git命令、私有库</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/11/08/创建一个私有库/">阅读全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-  
-    </div></section>
-  
 
-    
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    </nav>
+  
 
 
           </div>
@@ -197,9 +248,9 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: false,
+		isHome: true,
 		isPost: false,
-		isArchive: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
