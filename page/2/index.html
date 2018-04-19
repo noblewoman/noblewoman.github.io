@@ -135,6 +135,221 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-app反编译-ios代码混淆" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/17/app反编译-ios代码混淆/">app反编译&amp;ios代码混淆</a>
+    </h1>
+  
+
+        
+        <a href="/2018/01/17/app反编译-ios代码混淆/" class="archive-article-date">
+  	<time datetime="2018-01-17T08:17:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>推荐阅读<a href="https://www.jianshu.com/p/10873c5c1e08" target="_blank" rel="external">kuailejim的文章链接</a>。这里简单记录一下个人使用中遇到的问题和想法 。</li>
+</ul>
+<ol>
+<li>反编译工具：class-dump 和 Hopper Disassembler</li>
+</ol>
+<ul>
+<li>推荐使用后者，安装之后只需要将程序的二进制文件拖进去即可。拖进去之后默认显示源码是汇编语言，点击右上角的if(b)f(x),可以从伪代码中看出我们需要的信息。</li>
+<li>class-dump <a href="http://stevenygard.com/download/class-dump-3.5.dmg" target="_blank" rel="external">下载地址</a></li>
+<li>使用中遇到下面的问题？</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">➜  ~ git:(master) ✗ touch class-dump /usr/bin</div><div class="line">touch: /usr/bin: Operation not permitted</div></pre></td></tr></table></figure>
+<p>原因是osx 10.11 限制了root用户权限。<br>如何解决：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">// 注：我的class-dump在桌面上</div><div class="line">// 在根目录创建一个bin目录</div><div class="line">➜  ~ git:(master) ✗ mv /Users/011/Desktop/class-dump ~/bin</div><div class="line">// 把class-dump 拷贝到该目录</div><div class="line">➜  ~ git:(master) ✗ chmod +x ~/bin/class-dump</div><div class="line">// 打开.bash_profile文件，在文件最后增加一行export PATH=$HOME/bin/:$PATH并保存。</div><div class="line">➜  ~ git:(master) ✗ open ~/.bash_profile</div><div class="line">// 执行下面命令</div><div class="line">➜  ~ git:(master) ✗ source ~/.bash_profile</div><div class="line">// 执行class-dump 命令 出现版本说明执行成功</div><div class="line">➜  ~ git:(master) ✗ class-dump</div><div class="line">class-dump 3.5 (64 bit)</div><div class="line">Usage: class-dump [options] &lt;mach-o-file&gt;</div></pre></td></tr></table></figure></p>
+<ul>
+<li><p>安装成功后直接执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 注: TestDemo 项目的二进制文件 （在xcode中选择target下的Products下的TestDemo.app-&gt;show in finder-&gt;右键显示包内容即可。）</div><div class="line">class-dump -H TestDemo</div></pre></td></tr></table></figure>
+</li>
+<li><p>想法：反编译app可以从伪代码中看到其app大致执行了什么代码，但对于代码量多的项目，反编译成本变得更大。没什么实际意义，如果需要参考一些好的想法，大可去GitHub寻找开源库即可，不用大费周章。但是对于核心的代码，还是有必要做好混淆工作，原因不必解释啦。。</p>
+<h5 id="下面介绍一下如何简单的对代码进行混淆。参考念茜的文章。"><a href="#下面介绍一下如何简单的对代码进行混淆。参考念茜的文章。" class="headerlink" title="下面介绍一下如何简单的对代码进行混淆。参考念茜的文章。"></a>下面介绍一下如何简单的对代码进行混淆。<a href="http://blog.csdn.net/yiyaaixuexi/article/details/29201699" target="_blank" rel="external">参考念茜的文章</a>。</h5></li>
+</ul>
+<ol>
+<li>代码混淆的思路：</li>
+</ol>
+<ul>
+<li>随意往程序中加入迷惑的代码指令。</li>
+<li>易读字符替换 （防止class-dump出可读信息的有效办法)。</li>
+</ul>
+<ol>
+<li>混淆的时机：</li>
+</ol>
+<ul>
+<li>在开发时一直保留清晰可读的程序代码，同时，希望编译出来的二进制包含乱七八糟的混淆后的程序代码。因此我们可以在Build Phrase中设定在编译之前进行方法名的字符串替换。</li>
+</ul>
+<ol>
+<li>混淆的方法：</li>
+</ol>
+<ul>
+<li>1个是#define， 一个是利用tops。</li>
+<li>利用#define的好处是：可以把混淆结果合并在一个.h中，在工程Prefix.pch里导入.h文件。</li>
+</ul>
+<ol>
+<li>混淆工具：</li>
+</ol>
+<ul>
+<li>新建一个func.list文件(保存想要混淆的字段名or方法名)</li>
+<li><p>新建 confuse.sh 文件(保存混淆脚本)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#!/usr/bin/env bash</div><div class="line"></div><div class="line">TABLENAME=symbols</div><div class="line">SYMBOL_DB_FILE=&quot;symbols&quot;</div><div class="line">STRING_SYMBOL_FILE=&quot;func.list&quot;</div><div class="line">HEAD_FILE=&quot;$PROJECT_DIR/$PROJECT_NAME/codeObfuscation.h&quot;</div><div class="line">export LC_CTYPE=C</div><div class="line"></div><div class="line"># 维护数据库方便日后作排重</div><div class="line">createTable()</div><div class="line">&#123;</div><div class="line">    echo &quot;create table $TABLENAME(src text, des text);&quot; | sqlite3 $SYMBOL_DB_FILE</div><div class="line">&#125;</div><div class="line"></div><div class="line">insertValue()</div><div class="line">&#123;</div><div class="line">    echo &quot;insert into $TABLENAME values(&apos;$1&apos; ,&apos;$2&apos;);&quot; | sqlite3 $SYMBOL_DB_FILE</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">query()</div><div class="line">&#123;</div><div class="line">    echo &quot;select * from $TABLENAME where src=&apos;$1&apos;;&quot; | sqlite3 $SYMBOL_DB_FILE</div><div class="line">&#125;</div><div class="line"></div><div class="line">ramdomString()</div><div class="line">&#123;</div><div class="line">    # openssl rand 用于产生指定长度个bytes的随机字符。</div><div class="line">    #tr 可以对来自标准输入的字符进行替换、压缩和删除. -c(complerment): 取代所有不属于第一字符集的字符；-d：删除所有属于第一字符集的字符</div><div class="line">    # head 命令用于显示文件的开头的内容 ; -c 指定显示头部内容的字符数</div><div class="line">    openssl rand -base64 64 | tr -cd &apos;a-zA-Z&apos; |head -c 16</div><div class="line">&#125;</div><div class="line"></div><div class="line"># rm -f 强制删除文件或目录</div><div class="line">rm -f $SYMBOL_DB_FILE</div><div class="line">rm -f $HEAD_FILE</div><div class="line">createTable</div><div class="line"></div><div class="line">touch $HEAD_FILE</div><div class="line">echo &apos;#ifndef Demo_codeObfuscation_h</div><div class="line">#define Demo_codeObfuscation_h&apos; &gt;&gt; $HEAD_FILE</div><div class="line">echo &quot;//confuse string at `date`&quot; &gt;&gt; $HEAD_FILE</div><div class="line"># while read -ra lin 逐行读取文件 func.list</div><div class="line">cat &quot;$STRING_SYMBOL_FILE&quot; | while read -ra line; do</div><div class="line">if [[ ! -z &quot;$line&quot; ]]; then</div><div class="line">ramdom=`ramdomString`</div><div class="line">echo $line $ramdom</div><div class="line">insertValue $line $ramdom</div><div class="line">echo &quot;#define $line $ramdom&quot; &gt;&gt; $HEAD_FILE</div><div class="line">fi</div><div class="line">done</div><div class="line">echo &quot;#endif&quot; &gt;&gt; $HEAD_FILE</div><div class="line"></div><div class="line"></div><div class="line">sqlite3 $SYMBOL_DB_FILE .dump</div></pre></td></tr></table></figure>
+</li>
+<li><p>将上述两个文件添加到工程中，编译工程会生成一个codeObfuscation.h类。</p>
+</li>
+<li><p>如果工程中存在Prefix.pch文件不需要创建，如果不存在新建一个。打开Prefix.pch文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">#ifndef PrefixHeader_pch</div><div class="line">#define PrefixHeader_pch</div><div class="line">// 导入</div><div class="line">#import &quot;codeObfuscation.h&quot;</div><div class="line"></div><div class="line">#endif /* PrefixHeader_pch */</div></pre></td></tr></table></figure>
+</li>
+<li><p>配置Build Phase（打开Build Phase-&gt;Run Script, 添加confuse.sh文件路径）</p>
+</li>
+<li>在func.list中，写入待混淆的函数名or字段名。 编译即可<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//  func.list中填写</div><div class="line">userName</div><div class="line"></div><div class="line">password</div><div class="line"></div><div class="line">setAttributing</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>编译后<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">// codeObfuscation.h中显示</div><div class="line">#ifndef Demo_codeObfuscation_h</div><div class="line">#define Demo_codeObfuscation_h</div><div class="line">#define userName YdjyenVxUFKQQcWz</div><div class="line">#define password sebamooXacxZOUUO</div><div class="line">#define setAttributing geIFNMwdNLIEUkFS</div><div class="line">#endif</div></pre></td></tr></table></figure></p>
+<h5 id="至此再使用class-dump-进行反编译可以看下效果。"><a href="#至此再使用class-dump-进行反编译可以看下效果。" class="headerlink" title="至此再使用class-dump 进行反编译可以看下效果。"></a>至此再使用class-dump 进行反编译可以看下效果。</h5>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/01/17/app反编译-ios代码混淆/">阅读全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Masonry使用注意事项" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/15/Masonry使用注意事项/">Masonry使用注意事项</a>
+    </h1>
+  
+
+        
+        <a href="/2018/01/15/Masonry使用注意事项/" class="archive-article-date">
+  	<time datetime="2018-01-15T03:53:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="需要注意的点"><a href="#需要注意的点" class="headerlink" title="需要注意的点"></a>需要注意的点</h5><ul>
+<li>约束视图对象必须要在被addSubview：之后，才能给该对象添加约束。不然会crash。</li>
+<li>不能实现水平方向上排列两个不固定宽度的view。 其中一个view必须固定宽度或者设置最大宽度。</li>
+<li>leading, trailing 的使用，尽量用left &amp; right代替。在一些情况下leading, trailing布局是从右往左开始布局，可能会踩坑。</li>
+<li>建议是对于固定view，尽量给出一个固定的size，避免其它view相对它布局时出现约束冲突。出现约束冲突时，系统会默认选择一个约束进行布局。<h5 id="基础使用"><a href="#基础使用" class="headerlink" title="基础使用"></a>基础使用</h5></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mas_makeConstraints:添加约束</div><div class="line">mas_updateConstraints:更新约束</div><div class="line">mas_remakeConstraints:清除约束，重新添加</div></pre></td></tr></table></figure>
+<ul>
+<li><p>更新约束时可以直接调用mas_updateConstraints ；或者使用下面的方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">+ (BOOL)requiresConstraintBasedLayout&#123;</div><div class="line">    return YES;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 把需要更新的约束重写到这个方法内</div><div class="line">- (void)updateConstraints&#123;</div><div class="line">    [self mas_updateConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line"></div><div class="line">    &#125;];</div><div class="line">    [super updateConstraints];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>对某个view修改一些约束，希望立即生效。需要添加以下代码</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// 需要更新约束</div><div class="line">[self.nameLabel setNeedsUpdateConstraints];</div><div class="line">// 立即生效</div><div class="line">[self.nameLabel updateConstraintsIfNeeded];</div></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[self.nameLabel setNeedsLayout];</div><div class="line">[self.nameLabel layoutIfNeeded];</div></pre></td></tr></table></figure>
+<ul>
+<li>调整约束优先级:设置优先级后，masonry会优先实现优先级高的约束，发生冲突时，放弃优先级低的设定。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">    make.top.equalTo(self).offset(10);</div><div class="line">    make.left.equalTo(self.nameTitleLabel.mas_right).offset(12).priorityHigh();</div><div class="line">&#125;];</div></pre></td></tr></table></figure>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Masonry ， ios</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/01/15/Masonry使用注意事项/">阅读全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-NSMutableAttributedString-基础使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -831,160 +1046,6 @@
 
 
   
-    <article id="post-mac-设置启动项" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/22/mac-设置启动项/">mac 设置启动项</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/22/mac-设置启动项/" class="archive-article-date">
-  	<time datetime="2017-11-22T02:17:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="mac如何设置启动项"><a href="#mac如何设置启动项" class="headerlink" title="mac如何设置启动项"></a>mac如何设置启动项</h4><ol>
-<li>打开系统偏好设置</li>
-<li>打开用户与群组</li>
-<li>在登录项里进行修改</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/22/mac-设置启动项/">阅读全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-sourcetree-推送问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/09/sourcetree-推送问题/">sourcetree 推送问题</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/09/sourcetree-推送问题/" class="archive-article-date">
-  	<time datetime="2017-11-09T02:51:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <a id="more"></a>
-<ul>
-<li>背景：私有库里接入了腾讯云短视频SDK，搞完配置要推送到远程时，推送失败，提示：POST Git-receive-pack (chunked)。</li>
-<li><p>原因：网上查找到一个比较靠谱的说法：This is a bug in git, when using https it will use chunked encoding for uploads above a certain size. those do not work.<br>A trivial fix is to tell git to not chunk until some ridiculously large size value, such as: <strong>git config http.postBuffer 524288000</strong></p>
-</li>
-<li><p>解决方法：1.  命令行配置：git config http.postBuffer 524288000<br>2.打开sourcetree -&gt; 设置（右上角） -&gt; 高级 -&gt; 编辑配置文件<br>在文件最后添加<br>[http] </p>
-<pre><code>postBuffer = 524288000
-</code></pre><p>点击确定，重新推送。</p>
-</li>
-<li><p>后续问题，sourcetree 推送之后：提示：POST git-receive-pack (239851501 bytes) …</p>
-</li>
-<li>解决：转成命令推送 git push origin master<br>命令卡在：<strong>total 41(delta 8), reused 0(delta 0)</strong></li>
-<li>把原来修改的配置文件删掉。推送成功。</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">sourcetree git push</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/09/sourcetree-推送问题/">阅读全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -1090,6 +1151,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">sourcetree git push</a>
               </li>
              
@@ -1099,10 +1168,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">git命令、私有库</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
             
             <div class="clearfix"></div>

@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="noblewoman.github.io">
-  <title>sourcetree 推送问题 | noblewoman的个人空间</title>
+  <title>hexo g报错解决方案 | noblewoman的个人空间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="背景：私有库里接入了腾讯云短视频SDK，搞完配置要推送到远程时，推送失败，提示：POST Git-receive-pack (chunked)。 原因：网上查找到一个比较靠谱的说法：This is a bug in git, when using https it will use chunked encoding for uploads above a certain size. those">
-<meta name="keywords" content="sourcetree git push">
+  <meta name="description" content="1error：YAMLException: can not read a block mapping entry; a multiline key may not be an implicit key at line 4, column 1 背景：hexo g 时遇到一个错误，排查blog原文并没有觉得什么不妥。。这个时候不要慌，看错误信息能否提供有效的帮助：a multiline key may">
+<meta name="keywords" content="hexo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="sourcetree 推送问题">
-<meta property="og:url" content="noblewoman.github.io/2017/11/09/sourcetree-推送问题/index.html">
+<meta property="og:title" content="hexo g报错解决方案">
+<meta property="og:url" content="noblewoman.github.io/2018/04/13/hexo-g报错解决方案/index.html">
 <meta property="og:site_name" content="noblewoman的个人空间">
-<meta property="og:description" content="背景：私有库里接入了腾讯云短视频SDK，搞完配置要推送到远程时，推送失败，提示：POST Git-receive-pack (chunked)。 原因：网上查找到一个比较靠谱的说法：This is a bug in git, when using https it will use chunked encoding for uploads above a certain size. those">
-<meta property="og:updated_time" content="2017-11-09T03:45:13.000Z">
+<meta property="og:description" content="1error：YAMLException: can not read a block mapping entry; a multiline key may not be an implicit key at line 4, column 1 背景：hexo g 时遇到一个错误，排查blog原文并没有觉得什么不妥。。这个时候不要慌，看错误信息能否提供有效的帮助：a multiline key may">
+<meta property="og:updated_time" content="2018-04-13T06:38:11.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="sourcetree 推送问题">
-<meta name="twitter:description" content="背景：私有库里接入了腾讯云短视频SDK，搞完配置要推送到远程时，推送失败，提示：POST Git-receive-pack (chunked)。 原因：网上查找到一个比较靠谱的说法：This is a bug in git, when using https it will use chunked encoding for uploads above a certain size. those">
+<meta name="twitter:title" content="hexo g报错解决方案">
+<meta name="twitter:description" content="1error：YAMLException: can not read a block mapping entry; a multiline key may not be an implicit key at line 4, column 1 背景：hexo g 时遇到一个错误，排查blog原文并没有觉得什么不妥。。这个时候不要慌，看错误信息能否提供有效的帮助：a multiline key may">
   
     <link rel="alternative" href="/atom.xml" title="noblewoman的个人空间" type="application/atom+xml">
   
@@ -138,40 +138,28 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-sourcetree-推送问题" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-hexo-g报错解决方案" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      sourcetree 推送问题
+      hexo g报错解决方案
     </h1>
   
 
         
-        <a href="/2017/11/09/sourcetree-推送问题/" class="archive-article-date">
-  	<time datetime="2017-11-09T02:51:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-09</time>
+        <a href="/2018/04/13/hexo-g报错解决方案/" class="archive-article-date">
+  	<time datetime="2018-04-13T06:31:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-13</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <a id="more"></a>
-<ul>
-<li>背景：私有库里接入了腾讯云短视频SDK，搞完配置要推送到远程时，推送失败，提示：POST Git-receive-pack (chunked)。</li>
-<li><p>原因：网上查找到一个比较靠谱的说法：This is a bug in git, when using https it will use chunked encoding for uploads above a certain size. those do not work.<br>A trivial fix is to tell git to not chunk until some ridiculously large size value, such as: <strong>git config http.postBuffer 524288000</strong></p>
-</li>
-<li><p>解决方法：1.  命令行配置：git config http.postBuffer 524288000<br>2.打开sourcetree -&gt; 设置（右上角） -&gt; 高级 -&gt; 编辑配置文件<br>在文件最后添加<br>[http] </p>
-<pre><code>postBuffer = 524288000
-</code></pre><p>点击确定，重新推送。</p>
-</li>
-<li><p>后续问题，sourcetree 推送之后：提示：POST git-receive-pack (239851501 bytes) …</p>
-</li>
-<li>解决：转成命令推送 git push origin master<br>命令卡在：<strong>total 41(delta 8), reused 0(delta 0)</strong></li>
-<li>把原来修改的配置文件删掉。推送成功。</li>
-</ul>
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">error：YAMLException: can not read a block mapping entry; a multiline key may not be an implicit key at line 4, column 1</div></pre></td></tr></table></figure>
+<p>背景：hexo g 时遇到一个错误，排查blog原文并没有觉得什么不妥。。<br>这个时候不要慌，看错误信息能否提供有效的帮助：a multiline key may not be an implicit key at line 4，说明在第4行出现了问题，再次查看原文，果然发现在第4行tags处少加了一个空格。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">解决方案：在设置的tag与tags：之间加一个空格，搞定。</div></pre></td></tr></table></figure></p>
 
       
 
@@ -206,7 +194,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">sourcetree git push</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
         		</li>
       		
 		</ul>
@@ -262,7 +250,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http:noblewoman.github.io/2017/11/09/sourcetree-推送问题/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http:noblewoman.github.io/2018/04/13/hexo-g报错解决方案/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -276,18 +264,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/11/22/mac-设置启动项/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/04/19/常用的UIButton/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          mac 设置启动项
+          常用的UIButton
         
       </div>
     </a>
   
   
-    <a href="/2017/11/08/创建一个私有库/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">创建一个私有库</div>
+    <a href="/2018/04/13/python-报错解决方案/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">python 报错解决方案</div>
       <i class="icon-circle-right"></i>
     </a>
   

@@ -135,6 +135,160 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-mac-设置启动项" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/22/mac-设置启动项/">mac 设置启动项</a>
+    </h1>
+  
+
+        
+        <a href="/2017/11/22/mac-设置启动项/" class="archive-article-date">
+  	<time datetime="2017-11-22T02:17:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="mac如何设置启动项"><a href="#mac如何设置启动项" class="headerlink" title="mac如何设置启动项"></a>mac如何设置启动项</h4><ol>
+<li>打开系统偏好设置</li>
+<li>打开用户与群组</li>
+<li>在登录项里进行修改</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/11/22/mac-设置启动项/">阅读全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-sourcetree-推送问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/09/sourcetree-推送问题/">sourcetree 推送问题</a>
+    </h1>
+  
+
+        
+        <a href="/2017/11/09/sourcetree-推送问题/" class="archive-article-date">
+  	<time datetime="2017-11-09T02:51:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <a id="more"></a>
+<ul>
+<li>背景：私有库里接入了腾讯云短视频SDK，搞完配置要推送到远程时，推送失败，提示：POST Git-receive-pack (chunked)。</li>
+<li><p>原因：网上查找到一个比较靠谱的说法：This is a bug in git, when using https it will use chunked encoding for uploads above a certain size. those do not work.<br>A trivial fix is to tell git to not chunk until some ridiculously large size value, such as: <strong>git config http.postBuffer 524288000</strong></p>
+</li>
+<li><p>解决方法：1.  命令行配置：git config http.postBuffer 524288000<br>2.打开sourcetree -&gt; 设置（右上角） -&gt; 高级 -&gt; 编辑配置文件<br>在文件最后添加<br>[http] </p>
+<pre><code>postBuffer = 524288000
+</code></pre><p>点击确定，重新推送。</p>
+</li>
+<li><p>后续问题，sourcetree 推送之后：提示：POST git-receive-pack (239851501 bytes) …</p>
+</li>
+<li>解决：转成命令推送 git push origin master<br>命令卡在：<strong>total 41(delta 8), reused 0(delta 0)</strong></li>
+<li>把原来修改的配置文件删掉。推送成功。</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">sourcetree git push</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/11/09/sourcetree-推送问题/">阅读全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-创建一个私有库" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -327,6 +481,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">sourcetree git push</a>
               </li>
              
@@ -336,10 +498,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">git命令、私有库</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
             
             <div class="clearfix"></div>
