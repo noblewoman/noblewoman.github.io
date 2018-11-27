@@ -135,6 +135,72 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-git or pod命令执行出错~" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/28/git or pod命令执行出错~/">pod命令执行出错记录</a>
+    </h1>
+  
+
+        
+        <a href="/2018/02/28/git or pod命令执行出错~/" class="archive-article-date">
+  	<time datetime="2018-02-28T01:59:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>pod update 时遇到  Could not read from remote repository  Please make sure you have the correct access rights<br>and the repository exists.</li>
+<li>问题有两个原因：一：上面出错的库可能路径不对，在Podfile里添加该库的路径。source ‘<a href="https://.../.git" target="_blank" rel="external">https://.../.git</a>‘  二：你没有这个库的操作权限，找对应的管理员添加一下developer权限即可。</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/02/28/git or pod命令执行出错~/">阅读全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-linux-命令总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -967,90 +1033,6 @@
 
 
   
-    <article id="post-ios中使用MD5进行加密" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/28/ios中使用MD5进行加密/">ios中使用MD5进行加密</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/28/ios中使用MD5进行加密/" class="archive-article-date">
-  	<time datetime="2017-11-28T02:06:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>做视频缓存时需要对缓存路径进行加密，用到了MD5加密，就查了相关的资料，现记录一下。</p>
-<ul>
-<li>首先需要引入头文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#import &lt;CommonCrypto/CommonDigest.h&gt;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<ol>
-<li>对NSString 进行加密两种方式：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">- (NSString *)md5:(NSString *)inputString&#123;</div><div class="line">    const char *cString = [inputString UTF8String];</div><div class="line">    unsigned char digest[CC_MD5_DIGEST_LENGTH];</div><div class="line">    CC_MD5(cString, (CC_LONG)strlen(cString), digest);</div><div class="line">    NSMutableString *outputString = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH *2];</div><div class="line">    for (int i = 0; i &lt; CC_MD5_DIGEST_LENGTH; i ++) &#123;</div><div class="line">        [outputString appendFormat:@&quot;%02x&quot;,digest[i]];</div><div class="line">    &#125;</div><div class="line">    return outputString;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>方法二：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">- (NSString *)md51:(NSString *)inputString1&#123;</div><div class="line">    const char *cString = [inputString1 UTF8String];</div><div class="line">    unsigned char r [CC_MD5_DIGEST_LENGTH];</div><div class="line">    CC_MD5(cString, (CC_LONG)strlen(cString), r);</div><div class="line">    return [NSString                stringWithFormat:@&quot;%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x&quot;,</div><div class="line">    r[0],r[1],r[2], r[3], r[4], r[5], r[6], r[7], r[8], r[9], r[10],</div><div class="line">    r[11], r[12], r[13], r[14], r[15]];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>对NSData进行加密<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">- (NSString *)md5:(NSData *)data&#123;</div><div class="line">    unsigned char r[CC_MD5_DIGEST_LENGTH];</div><div class="line">    CC_MD5(data.bytes,(CC_LONG)data.length, r);</div><div class="line">    return [NSString stringWithFormat:@&quot;%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x&quot;,</div><div class="line">    r[0], r[1], r[2], r[3], r[4], r[5], r[6], r[7], r[8], r[9], r[10],</div><div class="line">    r[11], r[12], r[13], r[14], r[15]];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">MD5 NSString NSData</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/28/ios中使用MD5进行加密/">阅读全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -1152,11 +1134,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color5">status setting</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">status setting</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
